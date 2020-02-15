@@ -1,16 +1,17 @@
 import React from 'react';
 import './cardHolder.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import {
+  Card, 
+  CardActionArea, 
+  CardMedia, 
+  CardContent, 
+  Typography,
+  makeStyles, 
+  ExpansionPanel, 
+  ExpansionPanelSummary, 
+  ExpansionPanelDetails} from '@material-ui/core'
 
-import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles({

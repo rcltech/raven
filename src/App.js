@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from './gql/users';
 import { redirectToLogin } from './functions/redirectToLogin';
 import { Loading } from './components/Loading';
+import Demo from './Components/cardHolder';
 
 export const App = () => {
   const { loading: meLoading, error: meError, data: userData } = useQuery(
@@ -25,8 +26,6 @@ export const App = () => {
   } = userData;
 
   return (
-    <>
-      {`Welcome to raven, ${first_name} ${last_name} (username : ${username})!`}
-    </>
+    <Demo />
   );
 };

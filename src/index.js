@@ -1,12 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import qs from 'query-string';
 import './index.css';
 import App from './App';
+import { redirectToLogin } from './functions/redirectToLogin';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Index = () => {
+  const isIdEmpty = () => {
+    const id = localStorage.getItem('id');
+    return id === '' || id === null || id === undefined;
+  };
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+  const returnedId = qs.parse(window.location.search)['id'];
+  if (returnedId && returnedId.length > 0) {
+    localStorage.setItem('id', returnedId);
+    window.location.replace('/');
+  }
+
+  if (isIdEmpty()) {
+    return redirectToLogin();
+  }
+
+  return(
+    <App/>
+  );
+}
+
+ReactDOM.render(<Index />, document.getElementById('root'));
+
 serviceWorker.unregister();

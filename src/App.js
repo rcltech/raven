@@ -1,25 +1,31 @@
 import React from 'react';
 import './App.css';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_ME } from './gql/users';
+import { redirectToLogin } from './functions/redirectToLogin';
+import { Loading } from './components/Loading';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src="https://react-icons.netlify.com/static/media/react-icons.2e67b430.svg" className="App-logo" alt="logo" />
-        <p>
-          Hello World!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-         
-        </a>
-      </header>
-    </div>
+export const App = () => {
+  const { loading: meLoading, error: meError, data: userData } = useQuery(
+    GET_ME
   );
-}
+  const {
+    me: { username, first_name, last_name }
+  } = userData;
 
-export default App;
+  if (meLoading) {
+    return <Loading />;
+  }
+
+  if (meError) console.log(meError);
+
+  if (!userData || !userData.me) {
+    return redirectToLogin();
+  }
+
+  return (
+    <>
+      {`Welcome to raven, ${first_name} ${last_name} (username : ${username})!`}
+    </>
+  );
+};

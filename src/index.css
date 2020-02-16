@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merienda+One&display=swap');
+
 body,html {
-  
   margin: 0;
   padding: 0;
-  font-family: 'Merriweather', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -13,16 +14,6 @@ code {
 }
 
 div {
-  display: inline-block;
-  font-family: 'Merriweather', serif;
+display: inline-block;
 }
 
-.header {
-  background-color: #142850;
-  background-size: cover;
-  font-family: 'Merienda One', cursive;
-  padding: 10px;
-  font-size: 350%;
-  color: white;
-  display: block;
-}

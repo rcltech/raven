@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from './gql/users';
 import { redirectToLogin } from './functions/redirectToLogin';
 import { Loading } from './components/Loading';
-import Demo from './Components/cardHolder';
+import Card from './Components/cardHolder';
+import Header from './Components/header';
 
 export const App = () => {
   const { loading: meLoading, error: meError, data: userData } = useQuery(
@@ -26,6 +26,9 @@ export const App = () => {
   } = userData;
 
   return (
-    <Demo />
+    <>
+      <Header />
+      <Card />
+    </>
   );
 };

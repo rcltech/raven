@@ -1,5 +1,4 @@
 import React from 'react';
-import './cardHolder.css';
 
 import {
   Card, 
@@ -10,17 +9,27 @@ import {
   makeStyles, 
   ExpansionPanel, 
   ExpansionPanelSummary, 
-  ExpansionPanelDetails} from '@material-ui/core'
+  ExpansionPanelDetails,
+  } from '@material-ui/core'
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    padding: "10px",
+    fontFamily: "'Merriweather', serif",
   },
   media: {
     height: 140,
+    fontFamily: "'Merriweather', serif",
   },
+  expansionPanel: {
+    lineHeight: "0px",
+    marginBottom:"0px",
+    fontFamily: "'Merriweather', serif",
+  }
   
 });
 
@@ -28,6 +37,7 @@ export default function MediaCard() {
   const classes = useStyles();
 
   return (
+  
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
@@ -36,7 +46,7 @@ export default function MediaCard() {
           image={require("./yiruma.jpg")}
           title="Yiruma: Pianist"
         />
-        <CardContent>
+        <CardContent className={classes.root}>
           <h4>
             Yiruma Live
           </h4>
@@ -47,7 +57,7 @@ export default function MediaCard() {
           </body2>
         </CardContent>
       </CardActionArea>
-      <ExpansionPanel>
+      <ExpansionPanel className={classes.expansionPanel}>
       <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

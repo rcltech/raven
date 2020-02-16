@@ -1,13 +1,15 @@
 import React from 'react';
-import Demo from './Components/cardHolder';
+import Card from './Components/cardHolder';
+import Header from './Components/header'; 
 
 
-class App extends React.Component {
-    render(){
+const App = () => {
         return(
-            <Demo />   
+            <div>
+                <Header /> 
+                <Card />
+            </div>
         );
-    }
 }
 
 export default App;

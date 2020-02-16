@@ -11,7 +11,7 @@ const headerStyles = makeStyles({
         fontFamily: "'Merienda One', cursive",
         padding: '10px',
         color: 'white',
-        width: '100vw', /* Magic here */
+        width: '100vw',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'

@@ -6,7 +6,6 @@ const headerStyles = makeStyles({
     root: {
         fontSize: '350%',
         background: '#142850',
-        width: "100%",
         backgroundSize: 'cover',
         fontFamily: "'Merienda One', cursive",
         padding: '10px',

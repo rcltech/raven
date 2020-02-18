@@ -45,11 +45,11 @@ export default function MediaCard() {
         />
         <CardContent className={classes.root}>
           <h4>Yiruma Live</h4>
-          <body2>
+          <Typography variant={'body2'}>
             Date: DD/MM/YY <br />
             Venue: HK <br />
             Contact: ---
-          </body2>
+          </Typography>
         </CardContent>
       </CardActionArea>
       <ExpansionPanel className={classes.expansionPanel}>

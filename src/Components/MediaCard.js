@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MediaCard() {
+export const MediaCard = () => {
   const classes = useStyles();
 
   return (
@@ -69,4 +69,4 @@ export default function MediaCard() {
       </ExpansionPanel>
     </Card>
   );
-}
+};

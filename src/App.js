@@ -9,9 +9,6 @@ export const App = () => {
   const { loading: meLoading, error: meError, data: userData } = useQuery(
     GET_ME
   );
-  const {
-    me: { username, first_name, last_name }
-  } = userData;
 
   if (meLoading) {
     return <Loading />;
@@ -22,6 +19,10 @@ export const App = () => {
   if (!userData || !userData.me) {
     return redirectToLogin();
   }
+
+  const {
+    me: { username, first_name, last_name }
+  } = userData;
 
   return (
     <>

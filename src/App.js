@@ -18,10 +18,10 @@ export const App = () => {
   if (meError) console.log(meError);
 
   if (!userData || !userData.me) return redirectToLogin();
-
-  const {
-    me: { username, first_name, last_name }
-  } = userData;
+  else {
+    const { me } = userData;
+    console.log(me);
+  }
 
   return (
     <>

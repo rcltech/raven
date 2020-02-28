@@ -7,7 +7,7 @@ import { persistCache } from 'apollo-cache-persist';
 import './index.css';
 import { App } from './App';
 import { redirectToLogin } from './functions/redirectToLogin';
-import { Loading } from './components/Loading';
+import { Loading } from './components/shared/Loading';
 import * as serviceWorker from './serviceWorker';
 
 const Index = () => {

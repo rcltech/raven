@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import {
   Card,
@@ -31,8 +32,18 @@ const useStyles = makeStyles({
   }
 });
 
-export const MediaCard = () => {
+export const MediaCard = ({ event }) => {
+  //TODO: add real image instead of using boilerplate image (./yiruma.jpg)
+  //      we have to wait for phoenix to be properly set up (base64 -> url convertion and store in S3)
   const classes = useStyles();
+  const {
+    title,
+    start,
+    end,
+    venue,
+    description,
+    organiser: { username, email }
+  } = event;
 
   return (
     <Card className={classes.root}>
@@ -44,11 +55,13 @@ export const MediaCard = () => {
           title="Yiruma: Pianist"
         />
         <CardContent className={classes.root}>
-          <h4>Yiruma Live</h4>
+          <h4>{title}</h4>
           <Typography variant={'body2'}>
-            Date: DD/MM/YY <br />
-            Venue: HK <br />
-            Contact: ---
+            Date:{' '}
+            {`${moment(start).format('lll')} - ${moment(end).format('lll')}`}{' '}
+            <br />
+            Venue: {venue} <br />
+            Contact: {`${username} (${email})`}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -61,10 +74,7 @@ export const MediaCard = () => {
           Learn More
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Yiruma's live concert featuring his top hits: River Flows In You,
-            Kiss The Rain, May Be and many more.
-          </Typography>
+          <Typography>{description}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Card>

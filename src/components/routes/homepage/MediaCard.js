@@ -22,8 +22,9 @@ const useStyles = makeStyles({
     fontFamily: "'Merriweather', serif"
   },
   media: {
-    height: 140,
-    fontFamily: "'Merriweather', serif"
+    fontFamily: "'Merriweather', serif",
+    height: 0,
+    paddingTop: '56%'
   },
   expansionPanel: {
     lineHeight: '0px',
@@ -42,6 +43,7 @@ export const MediaCard = ({ event }) => {
     end,
     venue,
     description,
+    image_url,
     organiser: { username, email }
   } = event;
 
@@ -49,9 +51,8 @@ export const MediaCard = ({ event }) => {
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
-          style={{ height: 0, paddingTop: '56%' }}
           className={classes.media}
-          image={require('./yiruma.jpg')}
+          image={image_url}
           title="Yiruma: Pianist"
         />
         <CardContent className={classes.root}>

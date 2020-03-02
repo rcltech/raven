@@ -34,8 +34,6 @@ const useStyles = makeStyles({
 });
 
 export const MediaCard = ({ event }) => {
-  //TODO: add real image instead of using boilerplate image (./yiruma.jpg)
-  //      we have to wait for phoenix to be properly set up (base64 -> url convertion and store in S3)
   const classes = useStyles();
   const {
     title,
@@ -50,11 +48,7 @@ export const MediaCard = ({ event }) => {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={image_url}
-          title="Yiruma: Pianist"
-        />
+        <CardMedia className={classes.media} image={image_url} title={title} />
         <CardContent className={classes.root}>
           <h4>{title}</h4>
           <Typography variant={'body2'}>

@@ -1,19 +1,17 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Tooltip from '@material-ui/core/Tooltip';
-
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import { makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Fab,
+  Tooltip,
+  TextField,
+  Grid,
+  makeStyles
+} from '@material-ui/core';
+import { AccountCircle, Add as AddIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
@@ -22,22 +20,15 @@ const useStyles = makeStyles({
   }
 });
 
-export default function NewEventForm() {
-  const [open, setOpen] = React.useState(false);
+export const NewEventForm = () => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>
       <Tooltip
         title="Add New Event"
-        onClick={handleClickOpen}
+        onClick={() => setOpen(true)}
         placement="right"
       >
         <Fab color="primary" aria-label="add" className={classes.root}>
@@ -45,7 +36,7 @@ export default function NewEventForm() {
         </Fab>
       </Tooltip>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <center>
           <DialogTitle>Event Details</DialogTitle>
         </center>
@@ -94,14 +85,14 @@ export default function NewEventForm() {
           />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={() => setOpen(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={() => setOpen(false)} color="primary">
             Submit
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};

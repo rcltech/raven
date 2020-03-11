@@ -19,7 +19,8 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 345,
     padding: '10px',
-    fontFamily: "'Merriweather', serif"
+    fontFamily: "'Merriweather', serif",
+    margin: 10
   },
   media: {
     fontFamily: "'Merriweather', serif",

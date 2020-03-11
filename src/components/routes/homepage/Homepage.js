@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Header } from '../../shared/Header';
-import { MediaCard } from './MediaCard';
+import { Events } from './Events';
 import { Loading } from '../../shared/Loading';
 import { GET_ALL_EVENTS } from '../../../gql/events';
 import { GET_ME } from '../../../gql/users';
@@ -35,10 +35,8 @@ export const Homepage = () => {
   return (
     <>
       <Header />
+      <Events events={events} />
       <NewEventForm />
-      {events.map(event => (
-        <MediaCard key={event.id} event={event} />
-      ))}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MediaCard } from './MediaCard';
-import { Container, Grid, makeStyles } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   container: {

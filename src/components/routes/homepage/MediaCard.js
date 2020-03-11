@@ -1,19 +1,23 @@
 import React from 'react';
 import moment from 'moment';
-
 import {
+  Box,
   Card,
   CardActionArea,
   CardMedia,
   CardContent,
+  Container,
   Typography,
   makeStyles,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails
 } from '@material-ui/core';
-
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {
+  Delete,
+  FavoriteBorder,
+  ExpandMore as ExpandMoreIcon
+} from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
@@ -31,10 +35,17 @@ const useStyles = makeStyles({
     lineHeight: '0px',
     marginBottom: '0px',
     fontFamily: "'Merriweather', serif"
+  },
+  buttonsBar: {
+    textAlign: 'right',
+    padding: 0
+  },
+  button: {
+    margin: 10
   }
 });
 
-export const MediaCard = ({ event }) => {
+export const MediaCard = ({ event, me }) => {
   const classes = useStyles();
   const {
     title,
@@ -45,11 +56,21 @@ export const MediaCard = ({ event }) => {
     image_url,
     organiser: { username, email }
   } = event;
-
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia className={classes.media} image={image_url} title={title} />
+        <Container className={classes.buttonsBar}>
+          <Box
+            className={classes.button}
+            style={{ display: me.username === username ? '' : 'none' }}
+          >
+            <Delete />
+          </Box>
+          <Box className={classes.button}>
+            <FavoriteBorder />
+          </Box>
+        </Container>
         <CardContent className={classes.root}>
           <h4>{title}</h4>
           <Typography variant={'body2'}>

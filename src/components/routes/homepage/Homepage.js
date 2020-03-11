@@ -35,7 +35,7 @@ export const Homepage = () => {
   return (
     <>
       <Header />
-      <Events events={events} />
+      <Events events={events} me={userData.me} />
       <NewEventForm />
     </>
   );

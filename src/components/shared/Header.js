@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     fontSize: '350%',
-    background: '#142850',
+    background: theme.palette.primary.dark,
     backgroundSize: 'cover',
     fontFamily: "'Merienda One', cursive",
     padding: '10px',
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center'
   }
-});
+}));
 
 export const Header = () => {
   const classes = useStyles();

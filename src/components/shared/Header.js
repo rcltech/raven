@@ -7,9 +7,8 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.primary.dark,
     backgroundSize: 'cover',
     fontFamily: "'Merienda One', cursive",
-    padding: '10px',
     color: 'white',
-    width: '100vw',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'

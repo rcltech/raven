@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Header } from '../../shared/Header';
 import { Events } from './Events';
 import { Loading } from '../../shared/Loading';
 import { GET_ALL_EVENTS } from '../../../gql/events';
@@ -34,7 +33,6 @@ export const Homepage = () => {
 
   return (
     <>
-      <Header />
       <Events events={events} me={userData.me} />
       <NewEventForm />
     </>

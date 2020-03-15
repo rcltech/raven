@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import {
-  Button,
+  AppBar,
   Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Fab,
+  IconButton,
   Tooltip,
-  TextField,
-  Grid,
+  Toolbar,
+  Typography,
+  Slide,
   makeStyles
 } from '@material-ui/core';
-import { AccountCircle, Add as AddIcon } from '@material-ui/icons';
-
-const useStyles = makeStyles({
+import { ArrowForward, Add as AddIcon, Close } from '@material-ui/icons';
+import { EventForm } from './EventForm';
+const useStyles = makeStyles(theme => ({
   root: {
     margin: '30%',
     padding: '30%'
+  },
+  appBar: {
+    backgroundColor: theme.palette.primary.dark
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1
+  },
+  margin: {
+    margin: theme.spacing(2)
   }
+}));
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export const NewEventForm = () => {
@@ -35,63 +48,35 @@ export const NewEventForm = () => {
           <AddIcon />
         </Fab>
       </Tooltip>
-
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <center>
-          <DialogTitle>Event Details</DialogTitle>
-        </center>
-        <DialogContent>
-          <Grid container spacing={1} alignItems="flex-end">
-            <Grid item>
-              <AccountCircle />
-            </Grid>
-            <Grid item>
-              <TextField id="input-with-icon-grid" label="With a grid" />
-            </Grid>
-          </Grid>
-
-          <br />
-          <TextField
-            id="outlined-search"
-            label="Event Name"
-            type="Event Name"
-            variant="outlined"
-          />
-          <br />
-          <br />
-          <TextField
-            id="outlined-search"
-            defaultValue=""
-            type="Date"
-            variant="outlined"
-          />
-          <br />
-          <br />
-          <TextField
-            id="outlined-search"
-            label="Venue"
-            type="Venue"
-            variant="outlined"
-          />
-          <br />
-          <br />
-          <TextField
-            id="outlined-multiline-static"
-            label="Description"
-            multiline
-            rows="4"
-            defaultValue=""
-            variant="outlined"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={() => setOpen(false)} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={() => setOpen(false)} color="primary">
-            Submit
-          </Button>
-        </DialogActions>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={() => setOpen(false)}
+        TransitionComponent={Transition}
+      >
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={() => setOpen(false)}
+              aria-label="close"
+            >
+              <Close />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Event Details
+            </Typography>
+            <IconButton
+              autoFocus
+              color="inherit"
+              onClick={() => alert('TODO: Send createEvent mutation')}
+            >
+              <ArrowForward />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <EventForm />
       </Dialog>
     </div>
   );

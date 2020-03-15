@@ -15,7 +15,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: 'min(450px, 90%)',
     fontFamily: "'Merriweather', serif",
-    margin: 10
+    margin: 10,
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
   buttonsBar: {
     textAlign: 'right',
@@ -54,6 +57,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const MediaCard = ({ event, me }) => {
+  const [elevation, setElevation] = React.useState(1);
   const classes = useStyles();
   const {
     title,
@@ -63,7 +67,12 @@ export const MediaCard = ({ event, me }) => {
     organiser: { username }
   } = event;
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      elevation={elevation}
+      onMouseOver={() => setElevation(5)}
+      onMouseOut={() => setElevation(1)}
+    >
       <CardMedia className={classes.media} image={image_url} title={title} />
       <Container className={classes.buttonsBar}>
         <Button

@@ -14,8 +14,9 @@ import { ArrowForward, Add as AddIcon, Close } from '@material-ui/icons';
 import { EventForm } from './EventForm';
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: '30%',
-    padding: '30%'
+    position: 'fixed',
+    bottom: 20,
+    right: 20
   },
   appBar: {
     backgroundColor: theme.palette.primary.dark

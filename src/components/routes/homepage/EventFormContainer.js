@@ -33,7 +33,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const NewEventForm = () => {
+export const EventFormContainer = () => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
 

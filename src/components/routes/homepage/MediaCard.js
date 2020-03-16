@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import {
   Button,
@@ -9,7 +9,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { Delete, FavoriteBorder } from '@material-ui/icons';
+import { FavoriteBorder } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,15 +25,15 @@ const useStyles = makeStyles(theme => ({
     padding: 10
   },
   button: {
-    margin: 5,
-    border: '1px solid #f2f2f2',
+    margin: theme.spacing(1),
     width: 60,
-    height: 60,
-    borderRadius: '50%'
+    '&:hover': {
+      backgroundColor: 'inherit'
+    }
   },
   content: {
     margin: 0,
-    padding: '0px 15px'
+    padding: `0px ${theme.spacing(2)}px`
   },
   date: {
     color: theme.palette.primary.main,
@@ -49,23 +49,15 @@ const useStyles = makeStyles(theme => ({
   media: {
     height: 0,
     paddingTop: '56%'
-  },
-  expansionPanel: {
-    lineHeight: '0px',
-    margin: 10
   }
 }));
 
-export const MediaCard = ({ event, me }) => {
-  const [elevation, setElevation] = React.useState(1);
+export const MediaCard = ({ event }) => {
+  const [elevation, setElevation] = useState(1);
   const classes = useStyles();
-  const {
-    title,
-    start,
-    venue,
-    image_url,
-    organiser: { username }
-  } = event;
+
+  const { title, start, venue, image_url } = event;
+
   return (
     <Card
       className={classes.root}
@@ -75,12 +67,6 @@ export const MediaCard = ({ event, me }) => {
     >
       <CardMedia className={classes.media} image={image_url} title={title} />
       <Container className={classes.buttonsBar}>
-        <Button
-          className={classes.button}
-          style={{ display: me.username === username ? '' : 'none' }}
-        >
-          <Delete fontSize="small" />
-        </Button>
         <Button className={classes.button}>
           <FavoriteBorder fontSize="small" />
         </Button>

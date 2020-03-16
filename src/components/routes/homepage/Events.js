@@ -17,15 +17,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Events = ({ events, me }) => {
+export const Events = ({ events, me }) => {
   const classes = useStyles();
+
   return (
     <Container className={classes.container}>
       {events.map(event => (
-        <MediaCard key={event.id} event={event} me={me} />
+        <MediaCard key={event.id} event={event} />
       ))}
     </Container>
   );
 };
-
-export { Events };

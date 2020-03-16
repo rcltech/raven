@@ -39,7 +39,7 @@ export const EventFormContainer = () => {
   const classes = useStyles();
 
   return (
-    <div>
+    <>
       <Tooltip
         title="Add New Event"
         onClick={() => setOpen(true)}
@@ -61,7 +61,6 @@ export const EventFormContainer = () => {
               edge="start"
               color="inherit"
               onClick={() => setOpen(false)}
-              aria-label="close"
             >
               <Close />
             </IconButton>
@@ -79,6 +78,6 @@ export const EventFormContainer = () => {
         </AppBar>
         <EventForm />
       </Dialog>
-    </div>
+    </>
   );
 };

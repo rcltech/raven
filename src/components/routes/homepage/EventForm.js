@@ -9,9 +9,8 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import MomentUtils from '@date-io/moment';
-import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 import { CloudUpload } from '@material-ui/icons';
+import { EventTimePicker } from './EventTimePicker';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -27,9 +26,6 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '45% 10% 45%'
   },
-  timepicker: {
-    width: '100%'
-  },
   button: {
     backgroundColor: theme.palette.primary.main,
     color: '#fff',
@@ -39,19 +35,18 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.dark
     }
   },
+  inputImage: {
+    display: 'none'
+  },
   image: {
-    borderRadius: 10,
+    borderRadius: 5,
     borderTopLeftRadius: 0,
-    maxWidth: '100%',
-    alignSelf: 'center'
+    maxWidth: '100%'
   }
 }));
 
 export const EventForm = () => {
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
   const [imageUrl, setImageUrl] = useState('');
-
   const classes = useStyles();
 
   return (
@@ -65,25 +60,9 @@ export const EventForm = () => {
         <Input id="event-venue" />
       </FormControl>
       <FormControl className={classes.timepickersContainer}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <DateTimePicker
-            value={startTime}
-            onChange={setStartTime}
-            id="event-start"
-            className={classes.timepicker}
-            animateYearScrolling={true}
-          />
-        </MuiPickersUtilsProvider>
+        <EventTimePicker id="event-start" />
         <Typography>-</Typography>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <DateTimePicker
-            value={endTime}
-            onChange={setEndTime}
-            id="event-end"
-            className={classes.timepicker}
-            animateYearScrolling={true}
-          />
-        </MuiPickersUtilsProvider>
+        <EventTimePicker id="event-end" />
       </FormControl>
       <TextField
         fullWidth
@@ -97,7 +76,7 @@ export const EventForm = () => {
       <FormControl fullWidth className={classes.input}>
         <Input
           accept="image/*"
-          style={{ display: 'none' }}
+          className={classes.inputImage}
           id="event-image"
           type="file"
           onChange={event => {
@@ -116,7 +95,7 @@ export const EventForm = () => {
             fullWidth={true}
             component="span"
           >
-            {imageUrl === '' ? 'Upload image' : 'Change image'}
+            {imageUrl ? 'Change image' : 'Upload image'}
           </Button>
         </InputLabel>
         <img

@@ -23,6 +23,11 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)'
   },
+  title: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
   profile: {
     display: 'grid'
   },
@@ -42,7 +47,13 @@ export const Header = ({ me }) => {
   return (
     <AppBar position="static" className={classes.root}>
       <Toolbar className={classes.toolbar}>
-        <Typography variant="h4">Raven</Typography>
+        <Typography
+          variant="h4"
+          className={classes.title}
+          onClick={() => window.location.replace('/')}
+        >
+          Raven
+        </Typography>
         <Container className={classes.profile}>
           <Typography variant="body1" className={classes.profileName}>
             {`${first_name} ${last_name}`}

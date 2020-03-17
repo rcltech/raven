@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   AppBar,
-  Container,
+  Box,
   Toolbar,
   Typography,
   makeStyles
@@ -10,29 +10,33 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    flexGrow: 1,
     backgroundColor: theme.palette.primary.dark,
     padding: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
-      padding: 0
-    },
     [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(3)
     }
   },
-  toolbar: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)'
-  },
   title: {
+    flexGrow: 1,
     '&:hover': {
       cursor: 'pointer'
     }
   },
   profile: {
-    display: 'grid'
+    width: 'min-content',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, max-content)',
+    gridGap: theme.spacing(1),
+    alignItems: 'center'
+  },
+  profilePic: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+    borderRadius: '50%'
   },
   profileName: {
-    justifySelf: 'end',
+    maxWidth: '10vw',
     '&:hover': {
       textDecoration: 'underline',
       cursor: 'pointer'
@@ -41,12 +45,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Header = ({ me }) => {
-  const { first_name, last_name } = me;
+  const { first_name, last_name, image_url } = me;
   const classes = useStyles();
 
   return (
     <AppBar position="static" className={classes.root}>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar>
         <Typography
           variant="h4"
           className={classes.title}
@@ -54,11 +58,12 @@ export const Header = ({ me }) => {
         >
           Raven
         </Typography>
-        <Container className={classes.profile}>
+        <Box className={classes.profile}>
+          <img src={image_url} className={classes.profilePic} />
           <Typography variant="body1" className={classes.profileName}>
             {`${first_name} ${last_name}`}
           </Typography>
-        </Container>
+        </Box>
       </Toolbar>
     </AppBar>
   );

@@ -10,6 +10,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { FavoriteBorder } from '@material-ui/icons';
+import placeholder from '../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,7 +19,8 @@ const useStyles = makeStyles(theme => ({
     margin: 10,
     '&:hover': {
       cursor: 'pointer'
-    }
+    },
+    textAlign: 'left'
   },
   buttonsBar: {
     textAlign: 'right',
@@ -65,7 +67,11 @@ export const MediaCard = ({ event }) => {
       onMouseOver={() => setElevation(5)}
       onMouseOut={() => setElevation(1)}
     >
-      <CardMedia className={classes.media} image={image_url} title={title} />
+      <CardMedia
+        className={classes.media}
+        image={image_url ? image_url : placeholder}
+        title={title}
+      />
       <Container className={classes.buttonsBar}>
         <Button className={classes.button}>
           <FavoriteBorder fontSize="small" />

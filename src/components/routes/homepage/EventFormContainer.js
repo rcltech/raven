@@ -10,7 +10,7 @@ import {
   Slide,
   makeStyles
 } from '@material-ui/core';
-import { ArrowForward, Add as AddIcon, Close } from '@material-ui/icons';
+import { Add as AddIcon, Close as CloseIcon } from '@material-ui/icons';
 import { EventForm } from './EventForm';
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     right: 20
   },
   appBar: {
-    backgroundColor: theme.palette.primary.dark
+    backgroundColor: theme.palette.primary.main
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -62,18 +62,11 @@ export const EventFormContainer = () => {
               color="inherit"
               onClick={() => setOpen(false)}
             >
-              <Close />
+              <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
               Event Details
             </Typography>
-            <IconButton
-              autoFocus
-              color="inherit"
-              onClick={() => alert('TODO: Send createEvent mutation')}
-            >
-              <ArrowForward />
-            </IconButton>
           </Toolbar>
         </AppBar>
         <EventForm />

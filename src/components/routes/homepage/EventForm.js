@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Button,
   Container,
   FormControl,
   InputLabel,
@@ -9,13 +8,22 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { CloudUpload } from '@material-ui/icons';
 import { EventTimePicker } from './EventTimePicker';
+import { ImagePicker } from './ImagePicker';
+import { MediaCard } from './MediaCard';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
-    padding: `${theme.spacing(10)}px ${theme.spacing(5)}px`,
-    textAlign: 'center'
+    minHeight: '100vh',
+    padding: `${theme.spacing(10)}px 0px`,
+    textAlign: 'center',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 50%)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    [theme.breakpoints.down(800)]: {
+      display: 'block'
+    }
   },
   input: {
     margin: theme.spacing(2)
@@ -26,18 +34,6 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '45% 10% 45%'
   },
-  button: {
-    backgroundColor: theme.palette.primary.main,
-    color: '#fff',
-    width: '100%',
-    position: 'relative',
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark
-    }
-  },
-  inputImage: {
-    display: 'none'
-  },
   image: {
     borderRadius: 5,
     borderTopLeftRadius: 0,
@@ -46,65 +42,61 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const EventForm = () => {
+  const [title, setTitle] = useState('Event Title');
+  const [start, setStart] = useState(new Date());
+  const [end, setEnd] = useState(new Date());
+  const [venue, setVenue] = useState('Event Venue');
+  const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
   const classes = useStyles();
+  const event = { title, start, venue, image_url: imageUrl };
 
   return (
-    <Container maxWidth="sm" className={classes.formContainer}>
-      <FormControl fullWidth className={classes.input}>
-        <InputLabel htmlFor="event-title">Event Title</InputLabel>
-        <Input id="event-title" />
-      </FormControl>
-      <FormControl fullWidth className={classes.input}>
-        <InputLabel htmlFor="event-venue">Venue</InputLabel>
-        <Input id="event-venue" />
-      </FormControl>
-      <FormControl className={classes.timepickersContainer}>
-        <EventTimePicker id="event-start" />
-        <Typography>-</Typography>
-        <EventTimePicker id="event-end" />
-      </FormControl>
-      <TextField
-        fullWidth
-        multiline
-        label="Description"
-        id="event-description"
-        className={classes.input}
-        variant="outlined"
-        rows={6}
-      />
-      <FormControl fullWidth className={classes.input}>
-        <Input
-          accept="image/*"
-          className={classes.inputImage}
-          id="event-image"
-          type="file"
-          onChange={event => {
-            const imageFile = event.target.files[0];
-            if (!imageFile) return;
-            const fReader = new FileReader();
-            fReader.readAsDataURL(imageFile);
-            fReader.onloadend = ev => setImageUrl(ev.target.result);
-          }}
+    <Container maxWidth="lg" className={classes.formContainer}>
+      <Container>
+        <FormControl fullWidth className={classes.input}>
+          <InputLabel>Event Title</InputLabel>
+          <Input
+            onChange={({ target: { value } }) =>
+              setTitle(value === '' ? 'Event Title' : value)
+            }
+          />
+        </FormControl>
+        <FormControl fullWidth className={classes.input}>
+          <InputLabel>Venue</InputLabel>
+          <Input
+            onChange={({ target: { value } }) =>
+              setVenue(value === '' ? 'Event Venue' : value)
+            }
+          />
+        </FormControl>
+        <FormControl className={classes.timepickersContainer}>
+          <EventTimePicker value={start} setValue={setStart} />
+          <Typography>-</Typography>
+          <EventTimePicker value={end} setValue={setEnd} />
+        </FormControl>
+        <TextField
+          label="Description"
+          value={description}
+          fullWidth
+          multiline
+          className={classes.input}
+          variant="outlined"
+          rows={6}
+          onChange={ev => setDescription(ev.target.value)}
         />
-        <InputLabel htmlFor="event-image">
-          <Button
-            className={classes.button}
-            variant="outlined"
-            startIcon={<CloudUpload />}
-            fullWidth={true}
-            component="span"
-          >
-            {imageUrl ? 'Change image' : 'Upload image'}
-          </Button>
-        </InputLabel>
-        <img
-          src={imageUrl}
-          className={classes.image}
-          style={{ display: imageUrl ? '' : 'none' }}
-          alt="event"
-        />
-      </FormControl>
+        <FormControl fullWidth className={classes.input}>
+          <ImagePicker imageUrl={imageUrl} setImageUrl={setImageUrl} />
+        </FormControl>
+      </Container>
+
+      <Container>
+        <Typography variant="h6" color="inherit">
+          Your event card preview
+        </Typography>
+        <MediaCard event={event} />
+      </Container>
     </Container>
   );
 };

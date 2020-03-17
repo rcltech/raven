@@ -4,7 +4,24 @@ export const theme = responsiveFontSizes(
   createMuiTheme({
     palette: {
       primary: {
-        main: '#0d47a1'
+        light: '#727394',
+        main: '#464866',
+        dark: '#1d213b'
+      },
+      secondary: {
+        main: '#ef9a9a'
+      },
+      background: {
+        default: '#fff'
+      },
+      error: {
+        main: '#B00020'
+      },
+      user: {
+        main: '#ce93d8'
+      },
+      others: {
+        main: '#9fa8da'
       }
     }
   })

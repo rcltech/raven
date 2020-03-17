@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     flexGrow: 1,
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(3)

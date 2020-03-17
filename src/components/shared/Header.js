@@ -59,7 +59,11 @@ export const Header = ({ me }) => {
           Raven
         </Typography>
         <Box className={classes.profile}>
-          <img src={image_url} className={classes.profilePic} />
+          <img
+            src={image_url}
+            className={classes.profilePic}
+            alt="user-profile"
+          />
           <Typography variant="body1" className={classes.profileName}>
             {`${first_name} ${last_name}`}
           </Typography>

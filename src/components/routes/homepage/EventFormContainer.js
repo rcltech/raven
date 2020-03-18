@@ -66,7 +66,7 @@ export const EventFormContainer = () => {
             </Typography>
           </Toolbar>
         </AppBar>
-        <EventForm />
+        <EventForm setEventFormOpen={setOpen} />
       </Dialog>
     </>
   );

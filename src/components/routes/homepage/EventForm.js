@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import {
   Button,
   Container,
@@ -9,9 +10,13 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import { useMutation } from '@apollo/react-hooks';
+import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../gql/events';
 import { EventTimePicker } from './EventTimePicker';
 import { ImagePicker } from './ImagePicker';
 import { MediaCard } from './MediaCard';
+import { CreateEventModal } from './CreateEventModal';
+import { Loading } from '../../shared/Loading';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -53,13 +58,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventForm = () => {
+export const EventForm = ({ setEventFormOpen }) => {
   const [title, setTitle] = useState('Event Title');
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
   const [venue, setVenue] = useState('Event Venue');
   const [description, setDescription] = useState('');
   const [imageBase64, setImageBase64] = useState('');
+  const [createEventResponse, setCreateEventResponse] = useState({
+    isOpen: false,
+    title: '',
+    description: ''
+  });
 
   const classes = useStyles();
   const event = {
@@ -71,8 +81,41 @@ export const EventForm = () => {
     description
   };
 
+  const [createEvent, { loading, error }] = useMutation(CREATE_EVENT, {
+    refetchQueries: [{ query: GET_ALL_EVENTS }]
+  });
+
+  if (error) {
+    console.log(error);
+  }
+
+  const doCreateEvent = async () => {
+    const eventMutationVariable = {
+      title,
+      venue,
+      start: moment(start),
+      end: moment(end),
+      description,
+      image_base64: imageBase64
+    };
+    await createEvent({ variables: eventMutationVariable });
+
+    setCreateEventResponse({
+      isOpen: true,
+      title: error
+        ? 'An error has occured.'
+        : 'Your event has been created successfully!',
+      description: error ? 'Please try again later' : ''
+    });
+  };
+
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
+      <CreateEventModal
+        createEventResponse={createEventResponse}
+        onClose={() => setEventFormOpen(false)}
+      />
+      {loading ? <Loading /> : <></>}
       <Container>
         <FormControl fullWidth required className={classes.input}>
           <InputLabel>Event Title</InputLabel>
@@ -120,7 +163,9 @@ export const EventForm = () => {
         <MediaCard event={event} />
       </Container>
 
-      <Button className={classes.submitButton}>Submit event</Button>
+      <Button className={classes.submitButton} onClick={() => doCreateEvent()}>
+        Submit event
+      </Button>
     </Container>
   );
 };

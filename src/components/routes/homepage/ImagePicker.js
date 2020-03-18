@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ImagePicker = ({ imageUrl, setImageUrl }) => {
+export const ImagePicker = ({ imageBase64, setImageBase64 }) => {
   const classes = useStyles();
 
   return (
@@ -36,12 +36,12 @@ export const ImagePicker = ({ imageUrl, setImageUrl }) => {
         className={classes.inputImage}
         id="event-image"
         type="file"
-        onChange={event => {
-          const imageFile = event.target.files[0];
+        onChange={({ target: { files } }) => {
+          const imageFile = files[0];
           if (!imageFile) return;
           const fReader = new FileReader();
           fReader.readAsDataURL(imageFile);
-          fReader.onloadend = ev => setImageUrl(ev.target.result);
+          fReader.onloadend = ev => setImageBase64(ev.target.result);
         }}
       />
       <FormLabel htmlFor="event-image" className={classes.root}>
@@ -52,7 +52,7 @@ export const ImagePicker = ({ imageUrl, setImageUrl }) => {
           fullWidth={true}
           component="span"
         >
-          {imageUrl ? 'Change image' : 'Upload image'}
+          {imageBase64 ? 'Change image' : 'Upload image'}
         </Button>
       </FormLabel>
     </Container>

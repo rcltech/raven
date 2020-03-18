@@ -24,9 +24,6 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginLeft: theme.spacing(2),
     flex: 1
-  },
-  margin: {
-    margin: theme.spacing(2)
   }
 }));
 

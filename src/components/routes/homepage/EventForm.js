@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Button,
   Container,
   FormControl,
   InputLabel,
@@ -15,18 +16,19 @@ import { MediaCard } from './MediaCard';
 const useStyles = makeStyles(theme => ({
   formContainer: {
     minHeight: '100vh',
-    padding: `${theme.spacing(10)}px 0px`,
+    paddingTop: theme.spacing(10),
     textAlign: 'center',
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 50%)',
     alignItems: 'center',
     justifyContent: 'center',
     [theme.breakpoints.down(800)]: {
-      display: 'block'
+      minHeight: 'max-content',
+      display: 'unset'
     }
   },
   input: {
-    margin: theme.spacing(2)
+    margin: `${theme.spacing(2)}px 0px`
   },
   timepickersContainer: {
     margin: theme.spacing(2),
@@ -38,6 +40,16 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 5,
     borderTopLeftRadius: 0,
     maxWidth: '100%'
+  },
+  submitButton: {
+    margin: theme.spacing(5),
+    gridColumn: '1 / span 2',
+    justifySelf: 'center',
+    color: '#fff',
+    backgroundColor: theme.palette.primary.light,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main
+    }
   }
 }));
 
@@ -47,15 +59,22 @@ export const EventForm = () => {
   const [end, setEnd] = useState(new Date());
   const [venue, setVenue] = useState('Event Venue');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageBase64, setImageBase64] = useState('');
 
   const classes = useStyles();
-  const event = { title, start, venue, image_url: imageUrl };
+  const event = {
+    title,
+    start,
+    end,
+    venue,
+    image_url: imageBase64,
+    description
+  };
 
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <Container>
-        <FormControl fullWidth className={classes.input}>
+        <FormControl fullWidth required className={classes.input}>
           <InputLabel>Event Title</InputLabel>
           <Input
             onChange={({ target: { value } }) =>
@@ -63,7 +82,7 @@ export const EventForm = () => {
             }
           />
         </FormControl>
-        <FormControl fullWidth className={classes.input}>
+        <FormControl fullWidth required className={classes.input}>
           <InputLabel>Venue</InputLabel>
           <Input
             onChange={({ target: { value } }) =>
@@ -84,10 +103,13 @@ export const EventForm = () => {
           className={classes.input}
           variant="outlined"
           rows={6}
-          onChange={ev => setDescription(ev.target.value)}
+          onChange={({ target: { value } }) => setDescription(value)}
         />
         <FormControl fullWidth className={classes.input}>
-          <ImagePicker imageUrl={imageUrl} setImageUrl={setImageUrl} />
+          <ImagePicker
+            imageBase64={imageBase64}
+            setImageBase64={setImageBase64}
+          />
         </FormControl>
       </Container>
 
@@ -97,6 +119,8 @@ export const EventForm = () => {
         </Typography>
         <MediaCard event={event} />
       </Container>
+
+      <Button className={classes.submitButton}>Submit event</Button>
     </Container>
   );
 };

@@ -60,10 +60,9 @@ export const EventForm = ({ setEventFormOpen }) => {
   const [venue, setVenue] = useState('Event Venue');
   const [description, setDescription] = useState('');
   const [imageBase64, setImageBase64] = useState('');
-  const [createEventResponse, setCreateEventResponse] = useState({
+  const [modal, setModal] = useState({
     isOpen: false,
-    title: '',
-    description: ''
+    title: ''
   });
 
   const classes = useStyles();
@@ -94,21 +93,26 @@ export const EventForm = ({ setEventFormOpen }) => {
       description,
       image_base64: imageBase64
     };
-    await createEvent({ variables: eventMutationVariable });
 
-    setCreateEventResponse({
-      isOpen: true,
-      title: error
-        ? 'An error has occured.'
-        : 'Your event has been created successfully!',
-      description: error ? 'Please try again later' : ''
-    });
+    await createEvent({ variables: eventMutationVariable })
+      .then(res => {
+        setModal({
+          isOpen: true,
+          title: 'Your event has been created successfully!'
+        });
+      })
+      .catch(err => {
+        setModal({
+          isOpen: true,
+          title: 'An error has occured.'
+        });
+      });
   };
 
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <CreateEventModal
-        createEventResponse={createEventResponse}
+        modalDetails={modal}
         onClose={() => setEventFormOpen(false)}
       />
       {loading ? <Loading /> : <></>}

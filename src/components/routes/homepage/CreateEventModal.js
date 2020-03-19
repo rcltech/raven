@@ -3,8 +3,6 @@ import {
   Button,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle,
   Slide,
   makeStyles
@@ -20,17 +18,16 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const CreateEventModal = ({ createEventResponse, onClose }) => {
-  const { title, description, isOpen } = createEventResponse;
+export const CreateEventModal = ({
+  modalDetails: { isOpen, title },
+  onClose
+}) => {
   const classes = useStyles();
 
   return (
     <>
       <Dialog open={isOpen} TransitionComponent={Transition} onClose={onClose}>
         <DialogTitle className={classes.title}>{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{description}</DialogContentText>
-        </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Ok</Button>
         </DialogActions>

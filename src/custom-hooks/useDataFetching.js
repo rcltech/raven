@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../gql/users';
 import { GET_ALL_EVENTS } from '../gql/events';
-import { redirectToLogin } from '../functions/redirectToLogin';
+
+/**
+ * @author 98sean98
+ * This custom hook simplifies data fetching to one code snippet.
+ * The two most commonly used data objects which are me and events are fetched all at once here, and returned.
+ * Note that the error object corresponds to the errors returned by Apollo's useQuery hook.
+ * @returns {{data: {me, events}, loading: boolean, error: {me, events}}}
+ */
 
 export const useDataFetching = () => {
   const [data, setData] = useState();
@@ -23,10 +30,6 @@ export const useDataFetching = () => {
 
     if (meError || eventsError)
       setError({ me: meError, eventsError: eventsError });
-
-    if (!meData || !meData.me) {
-      return redirectToLogin();
-    }
 
     if (meData && eventsData) {
       setData({ me: meData.me, events: eventsData.events });

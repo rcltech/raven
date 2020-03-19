@@ -7,6 +7,7 @@ import { Header } from '../../shared/Header';
 import { Profile } from './Profile';
 import { EventList } from './EventList';
 import { Loading } from '../../shared/Loading';
+import { filterEvents } from './filterEvents';
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -26,16 +27,18 @@ export const UserProfile = () => {
 
   const { me, events } = data;
 
+  const userEvents = filterEvents(events, me.username);
+
   return (
     <>
       <Header />
       <Container className={classes.gridContainer}>
-        <Grid container>
+        <Grid container spacing={2}>
           <Grid item xs={12} sm={4} lg={6}>
             <Profile me={me} />
           </Grid>
           <Grid item xs sm lg>
-            <EventList events={events} />
+            <EventList events={userEvents} />
           </Grid>
         </Grid>
       </Container>

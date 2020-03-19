@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Container,
-  Input,
-  FormLabel,
-  makeStyles
-} from '@material-ui/core';
+import { Button, Container, FormLabel, makeStyles } from '@material-ui/core';
 import { CloudUpload } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +25,7 @@ export const ImagePicker = ({ imageBase64, setImageBase64 }) => {
 
   return (
     <Container className={classes.root}>
-      <Input
+      <input
         accept="image/*"
         className={classes.inputImage}
         id="event-image"

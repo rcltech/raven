@@ -41,11 +41,6 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '45% 10% 45%'
   },
-  image: {
-    borderRadius: 5,
-    borderTopLeftRadius: 0,
-    maxWidth: '100%'
-  },
   submitButton: {
     margin: theme.spacing(5),
     gridColumn: '1 / span 2',
@@ -72,6 +67,7 @@ export const EventForm = ({ setEventFormOpen }) => {
   });
 
   const classes = useStyles();
+
   const event = {
     title,
     start,

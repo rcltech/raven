@@ -18,10 +18,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const CreateEventModal = ({
-  modalDetails: { isOpen, title },
-  onClose
-}) => {
+export const Modal = ({ modalDetails: { isOpen, title }, onClose }) => {
   const classes = useStyles();
 
   return (

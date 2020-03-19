@@ -16,7 +16,7 @@ export const EventTimePicker = ({ value, setValue }) => {
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <DateTimePicker
         value={value}
-        onChange={setValue}
+        onChange={newValue => setValue(newValue)}
         className={classes.timepicker}
         animateYearScrolling={true}
       />

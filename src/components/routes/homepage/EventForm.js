@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import {
   Button,
   Container,
@@ -10,13 +9,11 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { useMutation } from '@apollo/react-hooks';
-import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../gql/events';
 import { EventTimePicker } from './EventTimePicker';
 import { ImagePicker } from './ImagePicker';
 import { MediaCard } from './MediaCard';
-import { CreateEventModal } from './CreateEventModal';
-import { Loading } from '../../shared/Loading';
+import { Modal } from './Modal';
+import { validateEvent } from '../../../functions/validateEvent';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -53,11 +50,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventForm = ({ setEventFormOpen }) => {
-  const [title, setTitle] = useState('Event Title');
+export const EventForm = ({ onFormSubmit }) => {
+  const [title, setTitle] = useState('');
   const [start, setStart] = useState(new Date());
   const [end, setEnd] = useState(new Date());
-  const [venue, setVenue] = useState('Event Venue');
+  const [venue, setVenue] = useState('');
   const [description, setDescription] = useState('');
   const [imageBase64, setImageBase64] = useState('');
   const [modal, setModal] = useState({
@@ -76,62 +73,20 @@ export const EventForm = ({ setEventFormOpen }) => {
     description
   };
 
-  const [createEvent, { loading, error }] = useMutation(CREATE_EVENT, {
-    refetchQueries: [{ query: GET_ALL_EVENTS }]
-  });
-
-  if (error) {
-    console.log(error);
-  }
-
-  const doCreateEvent = async () => {
-    const eventMutationVariable = {
-      title,
-      venue,
-      start: moment(start),
-      end: moment(end),
-      description,
-      image_base64: imageBase64
-    };
-
-    await createEvent({ variables: eventMutationVariable })
-      .then(res => {
-        setModal({
-          isOpen: true,
-          title: 'Your event has been created successfully!'
-        });
-      })
-      .catch(err => {
-        setModal({
-          isOpen: true,
-          title: 'An error has occured.'
-        });
-      });
-  };
-
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
-      <CreateEventModal
+      <Modal
         modalDetails={modal}
-        onClose={() => setEventFormOpen(false)}
+        onClose={() => setModal({ isOpen: false, title: '' })}
       />
-      {loading ? <Loading /> : <></>}
       <Container>
         <FormControl fullWidth required className={classes.input}>
           <InputLabel>Event Title</InputLabel>
-          <Input
-            onChange={({ target: { value } }) =>
-              setTitle(value === '' ? 'Event Title' : value)
-            }
-          />
+          <Input onChange={({ target: { value } }) => setTitle(value)} />
         </FormControl>
         <FormControl fullWidth required className={classes.input}>
           <InputLabel>Venue</InputLabel>
-          <Input
-            onChange={({ target: { value } }) =>
-              setVenue(value === '' ? 'Event Venue' : value)
-            }
-          />
+          <Input onChange={({ target: { value } }) => setVenue(value)} />
         </FormControl>
         <FormControl className={classes.timepickersContainer}>
           <EventTimePicker value={start} setValue={setStart} />
@@ -163,7 +118,14 @@ export const EventForm = ({ setEventFormOpen }) => {
         <MediaCard event={event} />
       </Container>
 
-      <Button className={classes.submitButton} onClick={() => doCreateEvent()}>
+      <Button
+        className={classes.submitButton}
+        onClick={() => {
+          const { isEventValid, message } = validateEvent(event);
+          if (!isEventValid) setModal({ isOpen: true, title: message });
+          else onFormSubmit(event);
+        }}
+      >
         Submit event
       </Button>
     </Container>

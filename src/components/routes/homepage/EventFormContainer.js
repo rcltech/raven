@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import moment from 'moment';
 import {
   AppBar,
   Dialog,
@@ -11,7 +12,12 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { Add as AddIcon, Close as CloseIcon } from '@material-ui/icons';
+import { useMutation } from '@apollo/react-hooks';
+import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../gql/events';
 import { EventForm } from './EventForm';
+import { Modal } from './Modal';
+import { Loading } from '../../shared/Loading';
+
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
@@ -33,10 +39,59 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export const EventFormContainer = () => {
   const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState({
+    isOpen: false,
+    title: ''
+  });
+
   const classes = useStyles();
+
+  const [createEvent, { loading, error }] = useMutation(CREATE_EVENT, {
+    refetchQueries: [{ query: GET_ALL_EVENTS }]
+  });
+
+  if (error) {
+    console.log(error);
+  }
+
+  const doCreateEvent = async ({
+    title,
+    venue,
+    start,
+    end,
+    description,
+    image_url: image_base64
+  }) => {
+    await createEvent({
+      variables: {
+        title,
+        venue,
+        start: moment(start),
+        end: moment(end),
+        description,
+        image_base64
+      }
+    })
+      .then(res => {
+        setModal({
+          isOpen: true,
+          title: 'Your event has been created successfully!'
+        });
+      })
+      .catch(err => {
+        setModal({
+          isOpen: true,
+          title: 'An error has occured.'
+        });
+      });
+  };
 
   return (
     <>
+      <Modal
+        modalDetails={modal}
+        onClose={() => window.location.replace('/')}
+      />
       <Tooltip
         title="Add New Event"
         onClick={() => setOpen(true)}
@@ -66,7 +121,8 @@ export const EventFormContainer = () => {
             </Typography>
           </Toolbar>
         </AppBar>
-        <EventForm setEventFormOpen={setOpen} />
+        <EventForm onFormSubmit={event => doCreateEvent(event)} />
+        {loading ? <Loading /> : <></>}
       </Dialog>
     </>
   );

@@ -14,6 +14,7 @@ import { ImagePicker } from './ImagePicker';
 import { MediaCard } from './MediaCard';
 import { Modal } from './Modal';
 import { validateEvent } from '../../../functions/validateEvent';
+import imagePlaceholder from '../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -56,7 +57,7 @@ export const EventForm = ({ onFormSubmit }) => {
   const [end, setEnd] = useState(new Date());
   const [venue, setVenue] = useState('');
   const [description, setDescription] = useState('');
-  const [imageBase64, setImageBase64] = useState('');
+  const [imageBase64, setImageBase64] = useState(imagePlaceholder);
   const [modal, setModal] = useState({
     isOpen: false,
     title: ''

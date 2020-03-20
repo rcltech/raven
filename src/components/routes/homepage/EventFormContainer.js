@@ -54,15 +54,15 @@ export const EventFormContainer = () => {
     console.log(error);
   }
 
-  const doCreateEvent = async ({
+  const doCreateEvent = ({
     title,
     venue,
     start,
     end,
     description,
-    image_url: image_base64
+    image_base64
   }) => {
-    await createEvent({
+    createEvent({
       variables: {
         title,
         venue,

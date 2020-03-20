@@ -70,7 +70,7 @@ export const EventForm = ({ onFormSubmit }) => {
     start,
     end,
     venue,
-    image_url: imageBase64,
+    image_base64: imageBase64,
     description
   };
 
@@ -116,7 +116,7 @@ export const EventForm = ({ onFormSubmit }) => {
         <Typography variant="h6" color="inherit">
           Your event card preview
         </Typography>
-        <MediaCard event={event} />
+        <MediaCard event={{ ...event, image_url: imageBase64 }} />
       </Container>
 
       <Button

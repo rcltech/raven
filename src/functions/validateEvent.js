@@ -18,13 +18,7 @@ const getImageSize = base64 => {
  * @param  {object} event the event object containing all fields inputted by event organiser
  * @return {object}       an object telling whether an event input is valid
  */
-const validateEvent = ({
-  title,
-  venue,
-  start,
-  end,
-  image_url: image_base64
-}) => {
+const validateEvent = ({ title, venue, start, end, image_base64 }) => {
   const imageSize = getImageSize(image_base64);
 
   if (title === '' || venue === '')

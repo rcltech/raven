@@ -54,7 +54,7 @@ export const Header = ({ me }) => {
         <Typography
           variant="h4"
           className={classes.title}
-          onClick={() => window.location.replace('/')}
+          onClick={() => window.location.reload()}
         >
           Raven
         </Typography>

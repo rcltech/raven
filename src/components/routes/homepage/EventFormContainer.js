@@ -90,7 +90,10 @@ export const EventFormContainer = () => {
     <>
       <Modal
         modalDetails={modal}
-        onClose={() => window.location.replace('/')}
+        onClose={() => {
+          setModal({ isOpen: false, title: '' });
+          setOpen(false);
+        }}
       />
       <Tooltip
         title="Add New Event"

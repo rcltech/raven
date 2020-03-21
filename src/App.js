@@ -7,6 +7,7 @@ import { redirectToLogin } from './functions/redirectToLogin';
 import { Homepage } from './components/routes/homepage/Homepage';
 import { Header } from './components/shared/Header';
 import { Loading } from './components/shared/Loading';
+import { UserProfile } from './components/routes/user-profile/UserProfile';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,11 +31,13 @@ export const App = () => {
   }
 
   const { me } = userData;
+
   return (
     <div className={classes.root}>
       <Router>
         <Header me={me} />
         <Switch>
+          <Route path="/user" component={() => <UserProfile />} />
           <Route exact path="/" component={() => <Homepage me={me} />} />
         </Switch>
       </Router>

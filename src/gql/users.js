@@ -6,6 +6,7 @@ export const GET_ME = gql`
       username
       first_name
       last_name
+      image_url
     }
   }
 `;

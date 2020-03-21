@@ -4,10 +4,12 @@ import qs from 'query-string';
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { persistCache } from 'apollo-cache-persist';
+import { ThemeProvider } from '@material-ui/core/styles';
 import './index.css';
 import { App } from './App';
 import { redirectToLogin } from './functions/redirectToLogin';
 import { Loading } from './components/shared/Loading';
+import { theme } from './theme';
 import * as serviceWorker from './serviceWorker';
 
 const Index = () => {
@@ -63,7 +65,9 @@ const Index = () => {
 
   return (
     <ApolloProvider client={client}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </ApolloProvider>
   );
 };

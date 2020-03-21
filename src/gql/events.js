@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-export const GET_ALL_EVENTS = gql`
+const GET_ALL_EVENTS = gql`
   query events {
     events {
       id
@@ -18,3 +18,35 @@ export const GET_ALL_EVENTS = gql`
     }
   }
 `;
+
+const CREATE_EVENT = gql`
+  mutation event(
+    $title: String!
+    $start: String!
+    $end: String!
+    $venue: String!
+    $image_base64: String!
+    $description: String
+  ) {
+    createEvent(
+      title: $title
+      start: $start
+      end: $end
+      venue: $venue
+      image_base64: $image_base64
+      description: $description
+    ) {
+      id
+    }
+  }
+`;
+
+const DELETE_EVENT = gql`
+  mutation deleteEvent($id: ID!) {
+    deleteEvent(id: $id) {
+      id
+    }
+  }
+`;
+
+export { GET_ALL_EVENTS, CREATE_EVENT, DELETE_EVENT };

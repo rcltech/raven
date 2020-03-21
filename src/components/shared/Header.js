@@ -1,22 +1,79 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  makeStyles
+} from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    fontSize: '350%',
-    background: '#142850',
-    backgroundSize: 'cover',
-    fontFamily: "'Merienda One', cursive",
-    padding: '10px',
-    color: 'white',
-    width: '100vw',
+    width: '100%',
+    flexGrow: 1,
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(1),
+    [theme.breakpoints.up('md')]: {
+      paddingRight: theme.spacing(3)
+    }
+  },
+  toolbar: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  title: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+  profile: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, max-content)',
+    gridGap: theme.spacing(1),
+    alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+  profilePic: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+    borderRadius: '50%'
+  },
+  profileName: {
+    maxWidth: '10vw',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   }
-});
+}));
 
-export const Header = () => {
+export const Header = ({ me }) => {
+  const { first_name, last_name, image_url } = me;
   const classes = useStyles();
-  return <div className={classes.root}>Raven</div>;
+
+  return (
+    <AppBar position="static" className={classes.root}>
+      <Toolbar className={classes.toolbar}>
+        <Typography
+          variant="h4"
+          className={classes.title}
+          onClick={() => window.location.reload()}
+        >
+          Raven
+        </Typography>
+        <Box className={classes.profile}>
+          <img
+            src={image_url}
+            className={classes.profilePic}
+            alt="user-profile"
+          />
+          <Typography variant="body1" className={classes.profileName}>
+            {`${first_name} ${last_name}`}
+          </Typography>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
 };

@@ -7,7 +7,7 @@ const size = 80;
 
 const useStyles = makeStyles({
   loading: {
-    position: 'absolute',
+    position: 'fixed',
     top: '50%',
     left: '50%',
     margin: `-${size / 2}px 0px 0px -${size / 2}px`

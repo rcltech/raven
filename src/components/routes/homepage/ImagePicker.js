@@ -31,7 +31,7 @@ export const ImagePicker = ({ imageBase64, setImageBase64 }) => {
       />
       <FormLabel htmlFor="event-image" className={classes.root}>
         <Button startIcon={<CloudUpload />} fullWidth={true} component="span">
-          {imageBase64 ? 'Change image' : 'Upload image'}
+          Upload image
         </Button>
       </FormLabel>
     </Container>

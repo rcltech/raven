@@ -17,18 +17,24 @@ const useStyles = makeStyles(theme => ({
       paddingRight: theme.spacing(3)
     }
   },
+  toolbar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   title: {
-    flexGrow: 1,
     '&:hover': {
       cursor: 'pointer'
     }
   },
   profile: {
-    width: 'min-content',
     display: 'grid',
     gridTemplateColumns: 'repeat(2, max-content)',
     gridGap: theme.spacing(1),
-    alignItems: 'center'
+    alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
   profilePic: {
     width: theme.spacing(5),
@@ -38,8 +44,7 @@ const useStyles = makeStyles(theme => ({
   profileName: {
     maxWidth: '10vw',
     '&:hover': {
-      textDecoration: 'underline',
-      cursor: 'pointer'
+      textDecoration: 'underline'
     }
   }
 }));
@@ -50,7 +55,7 @@ export const Header = ({ me }) => {
 
   return (
     <AppBar position="static" className={classes.root}>
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Typography
           variant="h4"
           className={classes.title}

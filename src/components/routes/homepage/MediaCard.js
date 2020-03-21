@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import {
-  Button,
   Card,
   CardMedia,
   CardContent,
@@ -9,14 +8,14 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { FavoriteBorder } from '@material-ui/icons';
+import { FavoriteBorder as FavoriteBorderIcon } from '@material-ui/icons';
 import placeholder from '../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: 'min(450px, 90%)',
     fontFamily: "'Merriweather', serif",
-    margin: 10,
+    margin: theme.spacing(1),
     '&:hover': {
       cursor: 'pointer'
     },
@@ -24,14 +23,10 @@ const useStyles = makeStyles(theme => ({
   },
   buttonsBar: {
     textAlign: 'right',
-    padding: 10
+    padding: theme.spacing(1)
   },
-  button: {
-    margin: theme.spacing(1),
-    width: 60,
-    '&:hover': {
-      backgroundColor: 'inherit'
-    }
+  like: {
+    margin: theme.spacing(1)
   },
   content: {
     margin: 0,
@@ -73,9 +68,7 @@ export const MediaCard = ({ event }) => {
         title={title}
       />
       <Container className={classes.buttonsBar}>
-        <Button className={classes.button}>
-          <FavoriteBorder fontSize="small" />
-        </Button>
+        <FavoriteBorderIcon fontSize="small" className={classes.like} />
       </Container>
       <CardContent className={classes.content}>
         <Typography variant="h6" className={classes.date}>

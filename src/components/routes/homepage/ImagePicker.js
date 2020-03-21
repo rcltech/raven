@@ -6,15 +6,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
-  button: {
-    backgroundColor: theme.palette.primary.light,
-    color: '#fff',
-    width: '100%',
-    position: 'relative',
-    '&:hover': {
-      backgroundColor: theme.palette.primary.main
-    }
-  },
   inputImage: {
     display: 'none'
   }
@@ -39,13 +30,7 @@ export const ImagePicker = ({ imageBase64, setImageBase64 }) => {
         }}
       />
       <FormLabel htmlFor="event-image" className={classes.root}>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          startIcon={<CloudUpload />}
-          fullWidth={true}
-          component="span"
-        >
+        <Button startIcon={<CloudUpload />} fullWidth={true} component="span">
           {imageBase64 ? 'Change image' : 'Upload image'}
         </Button>
       </FormLabel>

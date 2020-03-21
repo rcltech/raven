@@ -42,12 +42,7 @@ const useStyles = makeStyles(theme => ({
   submitButton: {
     margin: theme.spacing(5),
     gridColumn: '1 / span 2',
-    justifySelf: 'center',
-    color: '#fff',
-    backgroundColor: theme.palette.primary.light,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.main
-    }
+    justifySelf: 'center'
   }
 }));
 

@@ -12,7 +12,7 @@ import {
 import { EventTimePicker } from './EventTimePicker';
 import { ImagePicker } from './ImagePicker';
 import { MediaCard } from './MediaCard';
-import { Modal } from './Modal';
+import { Modal } from '../../shared/Modal';
 import { validateEvent } from '../../../functions/validateEvent';
 import imagePlaceholder from '../../../assets/no_image_placeholder.png';
 

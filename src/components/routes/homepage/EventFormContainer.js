@@ -1,5 +1,4 @@
 import React, { useState, forwardRef } from 'react';
-import moment from 'moment';
 import {
   AppBar,
   Dialog,
@@ -15,7 +14,7 @@ import { Add as AddIcon, Close as CloseIcon } from '@material-ui/icons';
 import { useMutation } from '@apollo/react-hooks';
 import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../gql/events';
 import { EventForm } from './EventForm';
-import { Modal } from './Modal';
+import { Modal } from '../../shared/Modal';
 import { Loading } from '../../shared/Loading';
 
 const useStyles = makeStyles(theme => ({
@@ -66,8 +65,8 @@ export const EventFormContainer = () => {
       variables: {
         title,
         venue,
-        start: moment(start),
-        end: moment(end),
+        start: new Date(start).toISOString(),
+        end: new Date(end).toISOString(),
         description,
         image_base64
       }
@@ -81,7 +80,7 @@ export const EventFormContainer = () => {
       .catch(err => {
         setModal({
           isOpen: true,
-          title: 'An error has occured.'
+          title: 'An error has occurred.'
         });
       });
   };

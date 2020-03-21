@@ -5,28 +5,31 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import placeholder from '../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 400
+    maxWidth: 400,
+    textAlign: 'left'
+  },
+  media: {
+    height: 200,
+    width: 220
   }
 });
 
 export const Profile = ({ me }) => {
-  const classes = useStyles;
+  const classes = useStyles();
 
   const { username, first_name, last_name, image_url } = me;
-
-  const imageSize = 220;
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
-          style={{ height: imageSize, width: imageSize }}
-          component="img"
-          src={image_url}
-          title="Profile picture"
+          className={classes.media}
+          image={image_url ? image_url : placeholder}
+          title={'Profile picture'}
         />
         <CardContent>
           <Typography variant="h6">{`${first_name} ${last_name}`}</Typography>

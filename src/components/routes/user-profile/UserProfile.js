@@ -3,7 +3,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { useDataFetching } from '../../../custom-hooks/useDataFetching';
-import { Header } from '../../shared/Header';
 import { Profile } from './Profile';
 import { EventList } from './EventList';
 import { Loading } from '../../shared/Loading';
@@ -31,7 +30,6 @@ export const UserProfile = () => {
 
   return (
     <>
-      <Header />
       <Container className={classes.gridContainer}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4} lg={6}>

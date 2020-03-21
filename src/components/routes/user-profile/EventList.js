@@ -25,8 +25,6 @@ const useStyles = makeStyles(theme => ({
 export const EventList = ({ events }) => {
   const classes = useStyles();
 
-  console.log(events);
-
   const displayDateTime = (start, end) => {
     return `${moment(start).format('D/MM h:mm')} to ${moment(end).format(
       'h:mm a'

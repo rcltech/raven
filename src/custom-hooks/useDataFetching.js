@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ME } from '../gql/users';
 import { GET_ALL_EVENTS } from '../gql/events';
-import { redirectToLogin } from '../functions/redirectToLogin';
 
 /**
  * @author 98sean98
  * This custom hook simplifies data fetching to one code snippet.
  * The two most commonly used data objects which are me and events are fetched all at once here, and returned.
  * Note that the error object corresponds to the errors returned by Apollo's useQuery hook.
- * This hook redirects to login when me data becomes null as id token becomes invalid
  * @returns {{data: {me, events}, loading: boolean, error: {me, events}}}
  */
 
@@ -18,11 +16,10 @@ export const useDataFetching = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
-  const { loading: meLoading, error: meError, data: meData } = useQuery(
-    GET_ME,
-    { fetchPolicy: 'network-only' }
-  );
+  // loads me data from cache
+  const { loading: meLoading, error: meError, data: meData } = useQuery(GET_ME);
 
+  // loads events data from cache first then update cache from network
   const {
     loading: eventsLoading,
     error: eventsError,
@@ -39,21 +36,7 @@ export const useDataFetching = () => {
     if (meData && meData.me && eventsData && eventsData.events) {
       setData({ me: meData.me, events: eventsData.events });
     }
-
-    // resolves edge cases where id token becomes invalid, and then web page is refreshed
-    if (loading && !meLoading && (!meData || !meData.me)) {
-      setError({ me: 'error: no user logged in' });
-      return redirectToLogin();
-    }
-  }, [
-    loading,
-    meData,
-    meLoading,
-    meError,
-    eventsData,
-    eventsLoading,
-    eventsError
-  ]);
+  }, [meData, meLoading, meError, eventsData, eventsLoading, eventsError]);
 
   return { data, loading, error };
 };

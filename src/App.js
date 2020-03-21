@@ -18,9 +18,11 @@ const useStyles = makeStyles(theme => ({
 export const App = () => {
   const classes = useStyles();
 
-  const { loading: meLoading, error: meError, data: userData } = useQuery(
-    GET_ME
-  );
+  const {
+    loading: meLoading,
+    error: meError,
+    data: userData
+  } = useQuery(GET_ME, { fetchPolicy: 'network-only' });
 
   if (meLoading) return <Loading />;
 
@@ -38,7 +40,7 @@ export const App = () => {
         <Header me={me} />
         <Switch>
           <Route path="/user" component={() => <UserProfile />} />
-          <Route exact path="/" component={() => <Homepage me={me} />} />
+          <Route exact path="/" component={() => <Homepage />} />
         </Switch>
       </Router>
     </div>

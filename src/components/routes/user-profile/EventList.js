@@ -22,17 +22,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventList = ({ events }) => {
+export const EventList = ({ events, onDelete }) => {
   const classes = useStyles();
 
   const displayDateTime = (start, end) => {
     return `${moment(start).format('D/MM h:mm')} to ${moment(end).format(
       'h:mm a'
     )}`;
-  };
-
-  const handleDelete = id => {
-    alert(`to delete event with id: ${id}`);
   };
 
   return (
@@ -52,7 +48,7 @@ export const EventList = ({ events }) => {
               <IconButton
                 edge="end"
                 aria-label="delete"
-                onClick={() => handleDelete(id)}
+                onClick={() => onDelete(id)}
               >
                 <DeleteIcon />
               </IconButton>

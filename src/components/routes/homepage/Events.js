@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { MediaCard } from './MediaCard';
-import { Container, OutlinedInput, makeStyles } from '@material-ui/core';
-import { Search as SearchIcon } from '@material-ui/icons';
+import { Container, makeStyles } from '@material-ui/core';
+import { SearchBar } from './SearchBar';
+import { selectEvents } from '../../../functions/selectEvents';
 
 const useStyles = makeStyles(theme => ({
   container: {
     width: '100%'
-  },
-  searchBar: {
-    margin: theme.spacing(2),
-    width: 'max(30%, 200px)',
-    color: theme.palette.primary.main
   },
   events: {
     padding: theme.spacing(1),
@@ -28,26 +24,21 @@ const useStyles = makeStyles(theme => ({
 
 export const Events = ({ events }) => {
   const [filter, setFilter] = useState('');
+  const [sortParam, setSortParam] = useState('');
+
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
-      <OutlinedInput
-        className={classes.searchBar}
-        placeholder="Search event(s)"
-        endAdornment={<SearchIcon color="inherit" />}
-        onChange={({ target: { value } }) => setFilter(value)}
+      <SearchBar
+        setFilter={setFilter}
+        sortParam={sortParam}
+        setSortParam={setSortParam}
       />
       <Container className={classes.events}>
-        {events
-          .filter(
-            ({ title, venue }) =>
-              title.toLowerCase().includes(filter) ||
-              venue.toLowerCase().includes(filter)
-          )
-          .map(event => (
-            <MediaCard key={event.id} event={event} />
-          ))}
+        {selectEvents({ events, filter, sortParam }).map(event => (
+          <MediaCard key={event.id} event={event} />
+        ))}
       </Container>
     </Container>
   );

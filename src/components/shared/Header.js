@@ -7,6 +7,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
+import placeholder from '../../assets/empty_profile_pic_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,7 +68,7 @@ export const Header = ({ me }) => {
         </Typography>
         <Box className={classes.profile} component={Link} to={'/user'}>
           <img
-            src={image_url}
+            src={image_url ? image_url : placeholder}
             className={classes.profilePic}
             alt="user-profile"
           />

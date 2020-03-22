@@ -10,11 +10,11 @@ export const Homepage = () => {
   if (loading) return <Loading />;
   if (error) console.log(error);
 
-  const { me, events } = data;
+  const { events } = data;
 
   return (
     <>
-      <Events events={events} me={me} />
+      <Events events={events} />
       <EventFormContainer />
     </>
   );

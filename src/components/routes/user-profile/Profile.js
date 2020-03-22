@@ -5,7 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import placeholder from '../../../assets/no_image_placeholder.png';
+import placeholder from '../../../assets/empty_profile_pic_placeholder.png';
 
 const useStyles = makeStyles({
   root: {

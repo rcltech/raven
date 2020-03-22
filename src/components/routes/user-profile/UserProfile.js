@@ -6,7 +6,7 @@ import { useDataFetching } from '../../../custom-hooks/useDataFetching';
 import { Profile } from './Profile';
 import { EventList } from './EventList';
 import { Loading } from '../../shared/Loading';
-import { filterEvents } from './filterEvents';
+import { filterEvents } from '../../../functions/filterEvents';
 import { useMutation } from '@apollo/react-hooks';
 import { DELETE_EVENT, GET_ALL_EVENTS } from '../../../gql/events';
 import { Modal } from '../../shared/Modal';

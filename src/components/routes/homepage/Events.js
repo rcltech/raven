@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MediaCard } from './MediaCard';
 import { Container, makeStyles } from '@material-ui/core';
 import { SearchBar } from './SearchBar';
-import { selectEvents } from '../../../functions/selectEvents';
+import { filterEvents } from '../../../functions/filterEvents';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -36,7 +36,7 @@ export const Events = ({ events }) => {
         setSortParam={setSortParam}
       />
       <Container className={classes.events}>
-        {selectEvents({ events, filter, sortParam }).map(event => (
+        {filterEvents({ events, filter, sortParam }).map(event => (
           <MediaCard key={event.id} event={event} />
         ))}
       </Container>

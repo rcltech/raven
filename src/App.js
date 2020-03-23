@@ -7,6 +7,7 @@ import { redirectToLogin } from './functions/redirectToLogin';
 import { Homepage } from './components/routes/homepage/Homepage';
 import { Header } from './components/shared/Header';
 import { Loading } from './components/shared/Loading';
+import { UserProfile } from './components/routes/user-profile/UserProfile';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,9 +18,11 @@ const useStyles = makeStyles(theme => ({
 export const App = () => {
   const classes = useStyles();
 
-  const { loading: meLoading, error: meError, data: userData } = useQuery(
-    GET_ME
-  );
+  const {
+    loading: meLoading,
+    error: meError,
+    data: userData
+  } = useQuery(GET_ME, { fetchPolicy: 'network-only' });
 
   if (meLoading) return <Loading />;
 
@@ -30,12 +33,14 @@ export const App = () => {
   }
 
   const { me } = userData;
+
   return (
     <div className={classes.root}>
       <Router>
         <Header me={me} />
         <Switch>
-          <Route exact path="/" component={() => <Homepage me={me} />} />
+          <Route path="/user" component={() => <UserProfile />} />
+          <Route exact path="/" component={() => <Homepage />} />
         </Switch>
       </Router>
     </div>

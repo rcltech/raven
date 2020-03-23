@@ -6,6 +6,8 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
+import placeholder from '../../assets/empty_profile_pic_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +36,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     '&:hover': {
       cursor: 'pointer'
-    }
+    },
+    color: theme.palette.primary.contrastText,
+    textDecoration: 'none'
   },
   profilePic: {
     width: theme.spacing(5),
@@ -42,10 +46,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '50%'
   },
   profileName: {
-    maxWidth: '10vw',
-    '&:hover': {
-      textDecoration: 'underline'
-    }
+    maxWidth: '10vw'
   }
 }));
 
@@ -53,19 +54,21 @@ export const Header = ({ me }) => {
   const { first_name, last_name, image_url } = me;
   const classes = useStyles();
 
+  const history = useHistory();
+
   return (
     <AppBar position="static" className={classes.root}>
       <Toolbar className={classes.toolbar}>
         <Typography
           variant="h4"
           className={classes.title}
-          onClick={() => window.location.reload()}
+          onClick={() => history.push('/')}
         >
           Raven
         </Typography>
-        <Box className={classes.profile}>
+        <Box className={classes.profile} component={Link} to={'/user'}>
           <img
-            src={image_url}
+            src={image_url ? image_url : placeholder}
             className={classes.profilePic}
             alt="user-profile"
           />

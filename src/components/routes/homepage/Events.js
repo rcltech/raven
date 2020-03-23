@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Events = ({ events, me }) => {
+export const Events = ({ events }) => {
   const classes = useStyles();
 
   return (

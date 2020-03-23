@@ -1,26 +1,20 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import { Events } from './Events';
 import { Loading } from '../../shared/Loading';
-import { GET_ALL_EVENTS } from '../../../gql/events';
 import { EventFormContainer } from './EventFormContainer';
+import { useDataFetching } from '../../../custom-hooks/useDataFetching';
 
-export const Homepage = ({ me }) => {
-  const {
-    loading: eventsLoading,
-    error: eventsError,
-    data: eventsData
-  } = useQuery(GET_ALL_EVENTS);
+export const Homepage = () => {
+  const { data, loading, error } = useDataFetching();
 
-  if (eventsLoading) return <Loading />;
+  if (loading) return <Loading />;
+  if (error) console.log(error);
 
-  if (eventsError) console.log(eventsError);
-
-  const { events } = eventsData;
+  const { events } = data;
 
   return (
     <>
-      <Events events={events} me={me} />
+      <Events events={events} />
       <EventFormContainer />
     </>
   );

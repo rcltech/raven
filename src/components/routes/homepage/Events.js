@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MediaCard } from './MediaCard';
-import { Container, makeStyles } from '@material-ui/core';
+import { Container, Typography, makeStyles } from '@material-ui/core';
 import { SearchBar } from './SearchBar';
 import { filterEvents } from '../../../functions/filterEvents';
 
@@ -19,6 +19,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       gridTemplateColumns: 'repeat(1, 1fr)'
     }
+  },
+  noEvents: {
+    color: theme.palette.error.light,
+    padding: theme.spacing(2)
   }
 }));
 
@@ -28,6 +32,8 @@ export const Events = ({ events }) => {
 
   const classes = useStyles();
 
+  const filteredEvents = filterEvents({ events, filter, sortParam });
+
   return (
     <Container className={classes.container}>
       <SearchBar
@@ -35,11 +41,19 @@ export const Events = ({ events }) => {
         sortParam={sortParam}
         setSortParam={setSortParam}
       />
-      <Container className={classes.events}>
-        {filterEvents({ events, filter, sortParam }).map(event => (
-          <MediaCard key={event.id} event={event} />
-        ))}
-      </Container>
+      {filteredEvents.length > 0 ? (
+        <Container className={classes.events}>
+          {filterEvents({ events, filter, sortParam }).map(event => (
+            <MediaCard key={event.id} event={event} />
+          ))}
+        </Container>
+      ) : (
+        <Container className={classes.noEvents}>
+          <Typography variant="h6">
+            Sorry, we couldn't find any results matching "{filter}"
+          </Typography>
+        </Container>
+      )}
     </Container>
   );
 };

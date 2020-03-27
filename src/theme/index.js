@@ -21,7 +21,8 @@ export const theme = responsiveFontSizes(
         main: '#ce93d8'
       },
       others: {
-        main: '#9fa8da'
+        main: '#e6e6e6',
+        dark: '#ccc'
       }
     },
     overrides: {

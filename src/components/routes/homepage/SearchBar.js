@@ -58,7 +58,7 @@ export const SearchBar = ({ setFilter, sortParam, setSortParam }) => {
           onChange={({ target: { value } }) => setSortParam(value)}
         >
           <MenuItem value={'Date'}>Date</MenuItem>
-          <MenuItem value={'Likes'}>Likes</MenuItem>
+          <MenuItem value={'Subscriber'}>Subscriber</MenuItem>
         </Select>
       </FormControl>
     </Container>

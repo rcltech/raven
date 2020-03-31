@@ -43,7 +43,7 @@ export const SearchBar = ({ setFilter, sortParam, setSortParam }) => {
     <Container className={classes.container}>
       <OutlinedInput
         className={classes.searchBar}
-        placeholder="Search event(s)"
+        placeholder="Search"
         endAdornment={<SearchIcon color="inherit" />}
         onChange={({ target: { value } }) => setFilter(value)}
       />

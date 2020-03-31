@@ -43,7 +43,7 @@ export const Events = ({ events }) => {
       />
       {filteredEvents.length > 0 ? (
         <Container className={classes.events}>
-          {filterEvents({ events, filter, sortParam }).map(event => (
+          {filteredEvents.map(event => (
             <MediaCard key={event.id} event={event} />
           ))}
         </Container>

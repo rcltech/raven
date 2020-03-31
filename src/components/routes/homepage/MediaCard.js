@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
 
 export const MediaCard = ({ event }) => {
   const [elevation, setElevation] = useState(1);
-  const [isLiked, setLiked] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const classes = useStyles();
 
@@ -79,9 +79,9 @@ export const MediaCard = ({ event }) => {
         <Button
           className={classes.subscribeButton}
           size="small"
-          onClick={() => setLiked(!isLiked)}
+          onClick={() => setIsSubscribed(!isSubscribed)}
         >
-          {isLiked ? 'Unsubscribe' : 'Subscribe'}
+          {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
         </Button>
       </Container>
       <CardContent className={classes.content}>

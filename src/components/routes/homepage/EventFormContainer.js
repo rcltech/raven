@@ -72,8 +72,10 @@ export const EventFormContainer = () => {
         image_base64
       }
     })
-      .then(res => {
-        setModal(createModal('create-event-success'));
+      .then(({ data: { createEvent: createEventResponse } }) => {
+        setModal(
+          createModal(createEventResponse ? 'create-event-success' : 'error')
+        );
       })
       .catch(err => {
         setModal(createModal('error'));

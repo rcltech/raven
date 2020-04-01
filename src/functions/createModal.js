@@ -17,7 +17,7 @@ export const createModal = modalKey => {
       title = 'Your event has been deleted successfully!';
       break;
     case 'error':
-      title = 'An error has occured.';
+      title = 'An error has occured, please try again later.';
       break;
     default:
       title = 'This is an empty modal.';

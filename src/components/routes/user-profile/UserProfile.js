@@ -46,8 +46,10 @@ export const UserProfile = () => {
 
   const onDelete = id => {
     doDeleteEvent({ variables: { id } })
-      .then(res => {
-        setModal(createModal('delete-event-success'));
+      .then(({ data: { deleteEvent: deleteEventResponse } }) => {
+        setModal(
+          createModal(deleteEventResponse ? 'delete-event-success' : 'error')
+        );
       })
       .catch(err => {
         setModal(createModal('error'));

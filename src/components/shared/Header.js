@@ -31,7 +31,11 @@ const useStyles = makeStyles(theme => ({
   profilePic: {
     width: theme.spacing(5),
     height: theme.spacing(5),
-    borderRadius: theme.spacing(0.5)
+    borderRadius: theme.spacing(0.5),
+    '&:hover': {
+      position: 'relative',
+      top: '-2px'
+    }
   }
 }));
 

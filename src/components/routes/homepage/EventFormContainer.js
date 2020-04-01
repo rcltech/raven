@@ -16,6 +16,7 @@ import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../gql/events';
 import { EventForm } from './EventForm';
 import { Modal } from '../../shared/Modal';
 import { Loading } from '../../shared/Loading';
+import { createModal } from '../../../functions/createModal';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -72,16 +73,10 @@ export const EventFormContainer = () => {
       }
     })
       .then(res => {
-        setModal({
-          isOpen: true,
-          title: 'Your event has been created successfully!'
-        });
+        setModal(createModal('create-event-success'));
       })
       .catch(err => {
-        setModal({
-          isOpen: true,
-          title: 'An error has occurred.'
-        });
+        setModal(createModal('error'));
       });
   };
 

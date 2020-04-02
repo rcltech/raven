@@ -1,11 +1,11 @@
 /**
  * @author welvin21
- * This function creates a modal
+ * This function creates a modal message
  * based on a unique key which determines the modal message
  * @param  {string} modalKey modal key which is unique to a particular modal message
  * @return {object}          an object describing the details of the modal
  */
-export const createModal = modalKey => {
+export const createModalMessage = modalKey => {
   const isOpen = true;
   let title = '';
 

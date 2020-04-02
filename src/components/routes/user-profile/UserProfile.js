@@ -10,7 +10,7 @@ import { selectUserEvents } from '../../../functions/filterEvents';
 import { useMutation } from '@apollo/react-hooks';
 import { DELETE_EVENT, GET_ALL_EVENTS } from '../../../gql/events';
 import { Modal } from '../../shared/Modal';
-import { createModal } from '../../../functions/createModal';
+import { createModalMessage } from '../../../functions/createModalMessage';
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -48,11 +48,13 @@ export const UserProfile = () => {
     doDeleteEvent({ variables: { id } })
       .then(({ data: { deleteEvent: deleteEventResponse } }) => {
         setModal(
-          createModal(deleteEventResponse ? 'delete-event-success' : 'error')
+          createModalMessage(
+            deleteEventResponse ? 'delete-event-success' : 'error'
+          )
         );
       })
       .catch(err => {
-        setModal(createModal('error'));
+        setModal(createModalMessage('error'));
       });
   };
 

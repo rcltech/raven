@@ -41,17 +41,17 @@ export const Events = ({ events }) => {
         sortParam={sortParam}
         setSortParam={setSortParam}
       />
-      {filteredEvents.length > 0 ? (
-        <Container className={classes.events}>
-          {filteredEvents.map(event => (
-            <MediaCard key={event.id} event={event} />
-          ))}
-        </Container>
-      ) : (
+      {filteredEvents.length === 0 && filter ? (
         <Container className={classes.noEvents}>
           <Typography variant="h6">
             Sorry, we couldn't find any results matching "{filter}"
           </Typography>
+        </Container>
+      ) : (
+        <Container className={classes.events}>
+          {filteredEvents.map(event => (
+            <MediaCard key={event.id} event={event} />
+          ))}
         </Container>
       )}
     </Container>

@@ -6,7 +6,7 @@ import { useDataFetching } from '../../../custom-hooks/useDataFetching';
 import { Profile } from './Profile';
 import { EventList } from './EventList';
 import { Loading } from '../../shared/Loading';
-import { filterEvents } from '../../../functions/filterEvents';
+import { selectUserEvents } from '../../../functions/filterEvents';
 import { useMutation } from '@apollo/react-hooks';
 import { DELETE_EVENT, GET_ALL_EVENTS } from '../../../gql/events';
 import { Modal } from '../../shared/Modal';
@@ -41,7 +41,7 @@ export const UserProfile = () => {
 
   const { me, events } = data;
 
-  const userEvents = filterEvents(events, me.username);
+  const userEvents = selectUserEvents(events, me.username);
 
   const onDelete = id => {
     doDeleteEvent({ variables: { id } })

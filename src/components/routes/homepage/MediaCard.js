@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import {
+  Button,
   Card,
   CardMedia,
   CardContent,
@@ -8,7 +9,6 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { FavoriteBorder as FavoriteBorderIcon } from '@material-ui/icons';
 import placeholder from '../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
@@ -25,8 +25,14 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'right',
     padding: theme.spacing(1)
   },
-  like: {
-    margin: theme.spacing(1)
+  subscribeButton: {
+    backgroundColor: theme.palette.others.main,
+    color: '#000',
+    borderRadius: 2,
+    border: '1px solid #d9d9d9',
+    '&:hover': {
+      backgroundColor: theme.palette.others.dark
+    }
   },
   content: {
     margin: 0,
@@ -51,6 +57,8 @@ const useStyles = makeStyles(theme => ({
 
 export const MediaCard = ({ event }) => {
   const [elevation, setElevation] = useState(1);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   const classes = useStyles();
 
   const { title, start, venue, image_url } = event;
@@ -68,7 +76,13 @@ export const MediaCard = ({ event }) => {
         title={title}
       />
       <Container className={classes.buttonsBar}>
-        <FavoriteBorderIcon fontSize="small" className={classes.like} />
+        <Button
+          className={classes.subscribeButton}
+          size="small"
+          onClick={() => setIsSubscribed(!isSubscribed)}
+        >
+          {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
+        </Button>
       </Container>
       <CardContent className={classes.content}>
         <Typography variant="h6" className={classes.date}>

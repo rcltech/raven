@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MediaCard } from './MediaCard';
-import { Container, makeStyles } from '@material-ui/core';
+import { Container, Typography, makeStyles } from '@material-ui/core';
+import { SearchBar } from './SearchBar';
+import { filterEvents } from '../../../functions/filterEvents';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    padding: 5,
+    width: '100%'
+  },
+  events: {
+    padding: theme.spacing(1),
     display: 'grid',
     justifyItems: 'center',
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -14,17 +19,41 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       gridTemplateColumns: 'repeat(1, 1fr)'
     }
+  },
+  noEvents: {
+    color: theme.palette.error.light,
+    padding: theme.spacing(2)
   }
 }));
 
 export const Events = ({ events }) => {
+  const [filter, setFilter] = useState('');
+  const [sortParam, setSortParam] = useState('');
+
   const classes = useStyles();
+
+  const filteredEvents = filterEvents({ events, filter, sortParam });
 
   return (
     <Container className={classes.container}>
-      {events.map(event => (
-        <MediaCard key={event.id} event={event} />
-      ))}
+      <SearchBar
+        setFilter={setFilter}
+        sortParam={sortParam}
+        setSortParam={setSortParam}
+      />
+      {filteredEvents.length > 0 ? (
+        <Container className={classes.events}>
+          {filteredEvents.map(event => (
+            <MediaCard key={event.id} event={event} />
+          ))}
+        </Container>
+      ) : (
+        <Container className={classes.noEvents}>
+          <Typography variant="h6">
+            Sorry, we couldn't find any results matching "{filter}"
+          </Typography>
+        </Container>
+      )}
     </Container>
   );
 };

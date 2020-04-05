@@ -14,7 +14,6 @@ import placeholder from '../../../assets/no_image_placeholder.png';
 const useStyles = makeStyles(theme => ({
   root: {
     width: 'min(450px, 90%)',
-    fontFamily: "'Merriweather', serif",
     margin: theme.spacing(1),
     '&:hover': {
       cursor: 'pointer'
@@ -85,7 +84,7 @@ export const MediaCard = ({ event }) => {
         </Button>
       </Container>
       <CardContent className={classes.content}>
-        <Typography variant="h6" className={classes.date}>
+        <Typography variant="subtitle1" className={classes.date}>
           {`${moment(start).format('lll')}`}
         </Typography>
         <Typography variant="h5" className={classes.title}>

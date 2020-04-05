@@ -32,8 +32,8 @@ export const Profile = ({ me }) => {
           title={'Profile picture'}
         />
         <CardContent>
-          <Typography variant="h6">{`${first_name} ${last_name}`}</Typography>
-          <Typography variant="body1" color="textSecondary">
+          <Typography variant="body1">{`${first_name} ${last_name}`}</Typography>
+          <Typography variant="body2" color="textSecondary">
             {username}
           </Typography>
         </CardContent>

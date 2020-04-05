@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventTimePicker = ({ value, setValue }) => {
+export const EventTimePicker = ({ value, handleTimeChange }) => {
   const classes = useStyles();
 
   return (
@@ -19,7 +19,7 @@ export const EventTimePicker = ({ value, setValue }) => {
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <DateTimePicker
           value={value}
-          onChange={newValue => setValue(newValue)}
+          onChange={newValue => handleTimeChange(newValue)}
           className={classes.timepicker}
           animateYearScrolling={true}
         />

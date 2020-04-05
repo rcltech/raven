@@ -9,6 +9,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import moment from 'moment';
 import { EventTimePicker } from './EventTimePicker';
 import { ImagePicker } from './ImagePicker';
 import { MediaCard } from './MediaCard';
@@ -49,7 +50,11 @@ const useStyles = makeStyles(theme => ({
 export const EventForm = ({ onFormSubmit }) => {
   const [title, setTitle] = useState('');
   const [start, setStart] = useState(new Date());
-  const [end, setEnd] = useState(new Date());
+  const [end, setEnd] = useState(
+    moment()
+      .add(1, 'hours')
+      .toDate()
+  );
   const [venue, setVenue] = useState('');
   const [description, setDescription] = useState('');
   const [imageBase64, setImageBase64] = useState(imagePlaceholder);
@@ -69,6 +74,26 @@ export const EventForm = ({ onFormSubmit }) => {
     description
   };
 
+  const handleStartTimeChange = startValue => {
+    setStart(startValue);
+    if (moment(startValue).isSameOrAfter(moment(end)))
+      setEnd(
+        moment(startValue)
+          .add(1, 'hours')
+          .toDate()
+      );
+  };
+
+  const handleEndTimeChange = endValue => {
+    setEnd(endValue);
+    if (moment(endValue).isSameOrBefore(moment(start)))
+      setStart(
+        moment(endValue)
+          .subtract(1, 'hours')
+          .toDate()
+      );
+  };
+
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <Modal
@@ -85,9 +110,15 @@ export const EventForm = ({ onFormSubmit }) => {
           <Input onChange={({ target: { value } }) => setVenue(value)} />
         </FormControl>
         <FormControl className={classes.timepickersContainer}>
-          <EventTimePicker value={start} setValue={setStart} />
+          <EventTimePicker
+            value={start}
+            handleTimeChange={startValue => handleStartTimeChange(startValue)}
+          />
           <Typography>-</Typography>
-          <EventTimePicker value={end} setValue={setEnd} />
+          <EventTimePicker
+            value={end}
+            handleTimeChange={endValue => handleEndTimeChange(endValue)}
+          />
         </FormControl>
         <TextField
           label="Description"

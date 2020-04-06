@@ -25,6 +25,45 @@ export const theme = responsiveFontSizes(
         dark: '#ccc'
       }
     },
+    typography: {
+      h1: {
+        fontFamily: 'Didact Gothic, sans-serif',
+        fontWeight: 900
+      },
+      h2: {
+        fontFamily: 'Didact Gothic, sans-serif',
+        fontWeight: 800
+      },
+      h3: {
+        fontFamily: 'Didact Gothic, sans-serif',
+        fontWeight: 700
+      },
+      h4: {
+        fontFamily: 'Didact Gothic, sans-serif',
+        fontWeight: 200
+      },
+      h5: {
+        fontFamily: 'Didact Gothic, sans-serif',
+        fontWeight: 600
+      },
+      h6: {
+        fontFamily: 'Roboto, sans-serif',
+        fontWeight: 800,
+        fontSize: '1em'
+      },
+      subtitle1: {
+        fontFamily: 'Roboto, sans-serif',
+        fontWeight: 600
+      },
+      subtitle2: {
+        fontFamily: 'Roboto, sans-serif',
+        fontWeight: 200
+      },
+      button: {
+        fontFamily: 'Didact Gothic, sans-serif',
+        fontWeight: 300
+      }
+    },
     overrides: {
       MuiButton: {
         text: {

@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Events = ({ events }) => {
+export const Events = ({ events, me: { username } }) => {
   const [filter, setFilter] = useState('');
   const [sortParam, setSortParam] = useState('');
 
@@ -49,9 +49,15 @@ export const Events = ({ events }) => {
         </Container>
       ) : (
         <Container className={classes.events}>
-          {filteredEvents.map(event => (
-            <MediaCard key={event.id} event={event} />
-          ))}
+          {filteredEvents.map(event => {
+            const { id, subscribers } = event;
+            const isEventSubscribed = subscribers
+              .map(({ username }) => username)
+              .includes(username);
+            return (
+              <MediaCard key={id} event={{ ...event, isEventSubscribed }} />
+            );
+          })}
         </Container>
       )}
     </Container>

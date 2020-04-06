@@ -15,6 +15,12 @@ const GET_ALL_EVENTS = gql`
       venue
       image_url
       description
+      subscribers {
+        username
+        first_name
+        last_name
+        image_url
+      }
     }
   }
 `;

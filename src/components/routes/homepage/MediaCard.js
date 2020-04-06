@@ -20,17 +20,17 @@ const useStyles = makeStyles(theme => ({
     },
     textAlign: 'left'
   },
-  buttonsBar: {
-    textAlign: 'right',
-    padding: theme.spacing(1)
+  subscribeBar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: theme.spacing(2)
   },
-  subscribeButton: {
-    backgroundColor: theme.palette.others.main,
+  subscribedButton: {
     color: '#000',
-    borderRadius: 2,
-    border: '1px solid #d9d9d9',
+    backgroundColor: theme.palette.others.main,
     '&:hover': {
-      backgroundColor: theme.palette.others.dark
+      backgroundColor: theme.palette.others.main
     }
   },
   content: {
@@ -54,13 +54,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const MediaCard = ({ event }) => {
+const SubscribersList = ({ subscribers = [] }) => {
+  const numberOfSubscribers = subscribers.length;
+  return (
+    <Typography variant="body2">
+      {numberOfSubscribers}{' '}
+      {numberOfSubscribers > 1 ? 'subscribers' : 'subscriber'}
+    </Typography>
+  );
+};
+
+export const MediaCard = ({
+  event: { title, start, venue, image_url, subscribers, isEventSubscribed }
+}) => {
   const [elevation, setElevation] = useState(1);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(isEventSubscribed);
 
   const classes = useStyles();
-
-  const { title, start, venue, image_url } = event;
 
   return (
     <Card
@@ -74,13 +84,14 @@ export const MediaCard = ({ event }) => {
         image={image_url ? image_url : placeholder}
         title={title}
       />
-      <Container className={classes.buttonsBar}>
+      <Container className={classes.subscribeBar}>
+        <SubscribersList subscribers={subscribers} />
         <Button
-          className={classes.subscribeButton}
+          className={isSubscribed ? classes.subscribedButton : ''}
           size="small"
           onClick={() => setIsSubscribed(!isSubscribed)}
         >
-          {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
+          {isSubscribed ? 'Subscribed' : 'Subscribe'}
         </Button>
       </Container>
       <CardContent className={classes.content}>

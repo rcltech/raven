@@ -6,7 +6,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import placeholder from '../../assets/empty_profile_pic_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
@@ -25,56 +25,35 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between'
   },
   title: {
-    '&:hover': {
-      cursor: 'pointer'
-    }
-  },
-  profile: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, max-content)',
-    gridGap: theme.spacing(1),
-    alignItems: 'center',
-    '&:hover': {
-      cursor: 'pointer'
-    },
-    color: theme.palette.primary.contrastText,
+    color: '#fff',
     textDecoration: 'none'
   },
   profilePic: {
     width: theme.spacing(5),
     height: theme.spacing(5),
-    borderRadius: '50%'
-  },
-  profileName: {
-    maxWidth: '10vw'
+    borderRadius: theme.spacing(0.5),
+    '&:hover': {
+      position: 'relative',
+      top: '-2px'
+    }
   }
 }));
 
-export const Header = ({ me }) => {
-  const { first_name, last_name, image_url } = me;
+export const Header = ({ me: { image_url } }) => {
   const classes = useStyles();
-
-  const history = useHistory();
 
   return (
     <AppBar position="static" className={classes.root}>
       <Toolbar className={classes.toolbar}>
-        <Typography
-          variant="h4"
-          className={classes.title}
-          onClick={() => history.push('/')}
-        >
-          Raven
-        </Typography>
-        <Box className={classes.profile} component={Link} to={'/user'}>
+        <Box component={Link} to={'/'} className={classes.title}>
+          <Typography variant="h4">Raven</Typography>
+        </Box>
+        <Box component={Link} to={'/user'}>
           <img
             src={image_url ? image_url : placeholder}
             className={classes.profilePic}
             alt="user-profile"
           />
-          <Typography variant="body1" className={classes.profileName}>
-            {`${first_name} ${last_name}`}
-          </Typography>
         </Box>
       </Toolbar>
     </AppBar>

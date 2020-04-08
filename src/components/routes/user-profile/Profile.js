@@ -28,7 +28,7 @@ export const Profile = ({ me }) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={image_url ? image_url : placeholder}
+          image={image_url ? `${image_url}?sz=500` : placeholder}
           title={'Profile picture'}
         />
         <CardContent>

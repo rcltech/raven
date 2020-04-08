@@ -23,12 +23,16 @@ export const Profile = ({ me }) => {
 
   const { username, first_name, last_name, image_url } = me;
 
+  // Get better quality version of google profile image
+  // Please refer to https://github.com/rcltech/phoenix for more details
+  const highResolutionImageURL = `${image_url}?sz=500`;
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={image_url ? image_url : placeholder}
+          image={image_url ? highResolutionImageURL : placeholder}
           title={'Profile picture'}
         />
         <CardContent>

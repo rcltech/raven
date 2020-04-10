@@ -66,7 +66,8 @@ const SubscribersList = ({ subscribers = [] }) => {
 
 export const MediaCard = ({
   event: { id, title, start, venue, image_url, subscribers },
-  isEventSubscribed
+  isEventSubscribed,
+  disableMutation
 }) => {
   const [elevation, setElevation] = useState(1);
   const [isSubscribed, setIsSubscribed] = useState(isEventSubscribed);
@@ -116,6 +117,7 @@ export const MediaCard = ({
           className={isSubscribed ? classes.subscribedButton : ''}
           size="small"
           onClick={() => onSubscribeButtonClicked()}
+          disabled={disableMutation}
         >
           {subscribeLoading || unsubscribeLoading
             ? 'Loading'

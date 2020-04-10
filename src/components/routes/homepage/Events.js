@@ -64,6 +64,7 @@ export const Events = ({ events, me: { username } }) => {
                 key={id}
                 event={event}
                 isEventSubscribed={isEventSubscribed}
+                disableMutation={false}
               />
             );
           })}

@@ -142,7 +142,11 @@ export const EventForm = ({ onFormSubmit }) => {
         <Typography variant="h6" color="inherit">
           Your event card preview
         </Typography>
-        <MediaCard event={{ ...event, image_url: imageBase64 }} />
+        <MediaCard
+          event={{ ...event, image_url: imageBase64 }}
+          isEventSubscribed={false}
+          disableMutation={true}
+        />
       </Container>
 
       <Button

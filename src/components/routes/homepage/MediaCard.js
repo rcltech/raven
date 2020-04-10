@@ -10,14 +10,14 @@ import {
   makeStyles
 } from '@material-ui/core';
 import placeholder from '../../../assets/no_image_placeholder.png';
+import { useSubscribeMutations } from '../../../custom-hooks';
+import { Modal } from '../../shared/Modal';
+import { createModalMessage } from '../../../functions/createModalMessage';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: 'min(450px, 90%)',
     margin: theme.spacing(1),
-    '&:hover': {
-      cursor: 'pointer'
-    },
     textAlign: 'left'
   },
   subscribeBar: {
@@ -65,12 +65,37 @@ const SubscribersList = ({ subscribers = [] }) => {
 };
 
 export const MediaCard = ({
-  event: { title, start, venue, image_url, subscribers, isEventSubscribed }
+  event: { id, title, start, venue, image_url, subscribers },
+  isEventSubscribed
 }) => {
   const [elevation, setElevation] = useState(1);
   const [isSubscribed, setIsSubscribed] = useState(isEventSubscribed);
+  const [modal, setModal] = useState({
+    isOpen: false,
+    title: ''
+  });
+
+  const {
+    methods: { subscribeEvent, unsubscribeEvent },
+    loading: { subscribeLoading, unsubscribeLoading },
+    error: { subscribeError, unsubscribeError }
+  } = useSubscribeMutations();
 
   const classes = useStyles();
+
+  const onSubscribeButtonClicked = () => {
+    if (!isSubscribed)
+      subscribeEvent({ variables: { id } })
+        .then(({ data }) => setIsSubscribed(true))
+        .catch(err => setModal(createModalMessage('error')));
+    else
+      unsubscribeEvent({ variables: { id } })
+        .then(({ data }) => setIsSubscribed(false))
+        .catch(err => setModal(createModalMessage('error')));
+  };
+
+  if (subscribeError || unsubscribeError)
+    console.log({ subscribeError, unsubscribeError });
 
   return (
     <Card
@@ -79,6 +104,7 @@ export const MediaCard = ({
       onMouseOver={() => setElevation(5)}
       onMouseOut={() => setElevation(1)}
     >
+      <Modal modalDetails={modal} onClose={() => window.location.reload()} />
       <CardMedia
         className={classes.media}
         image={image_url ? image_url : placeholder}
@@ -89,9 +115,13 @@ export const MediaCard = ({
         <Button
           className={isSubscribed ? classes.subscribedButton : ''}
           size="small"
-          onClick={() => setIsSubscribed(!isSubscribed)}
+          onClick={() => onSubscribeButtonClicked()}
         >
-          {isSubscribed ? 'Subscribed' : 'Subscribe'}
+          {subscribeLoading || unsubscribeLoading
+            ? 'Loading'
+            : isSubscribed
+            ? 'Subscribed'
+            : 'Subscribe'}
         </Button>
       </Container>
       <CardContent className={classes.content}>

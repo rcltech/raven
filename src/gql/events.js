@@ -55,4 +55,28 @@ const DELETE_EVENT = gql`
   }
 `;
 
-export { GET_ALL_EVENTS, CREATE_EVENT, DELETE_EVENT };
+const SUBSCRIBE_EVENT = gql`
+  mutation subscribeEvent($id: ID!) {
+    addEventSubscriber(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
+const UNSUBSCRIBE_EVENT = gql`
+  mutation unsubscribeEvent($id: ID!) {
+    removeEventSubscriber(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
+export {
+  GET_ALL_EVENTS,
+  CREATE_EVENT,
+  DELETE_EVENT,
+  SUBSCRIBE_EVENT,
+  UNSUBSCRIBE_EVENT
+};

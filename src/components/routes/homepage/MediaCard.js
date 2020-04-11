@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import placeholder from '../../../assets/no_image_placeholder.png';
 import { useSubscribeMutations } from '../../../custom-hooks';
-import { Modal } from '../../shared';
+import { Modal, SubscribersList } from '../../shared';
 import { createModalMessage } from '../../../functions';
 
 const useStyles = makeStyles(theme => ({
@@ -53,16 +53,6 @@ const useStyles = makeStyles(theme => ({
     paddingTop: '60%'
   }
 }));
-
-const SubscribersList = ({ subscribers = [] }) => {
-  const numberOfSubscribers = subscribers.length;
-  return (
-    <Typography variant="body2">
-      {numberOfSubscribers}{' '}
-      {numberOfSubscribers > 1 ? 'subscribers' : 'subscriber'}
-    </Typography>
-  );
-};
 
 export const MediaCard = ({
   event: { id, title, start, venue, image_url, subscribers },

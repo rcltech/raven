@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MediaCard } from './MediaCard';
 import { Container, Typography, makeStyles } from '@material-ui/core';
 import { SearchBar } from './SearchBar';
-import { filterEvents } from '../../../functions/filterEvents';
+import { filterEvents } from '../../../functions';
 
 const useStyles = makeStyles(theme => ({
   container: {

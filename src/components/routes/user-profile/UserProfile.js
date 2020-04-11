@@ -5,12 +5,10 @@ import Container from '@material-ui/core/Container';
 import { useDataFetching } from '../../../custom-hooks';
 import { Profile } from './Profile';
 import { EventList } from './EventList';
-import { Loading } from '../../shared/Loading';
-import { selectUserEvents } from '../../../functions/filterEvents';
 import { useMutation } from '@apollo/react-hooks';
 import { DELETE_EVENT, GET_ALL_EVENTS } from '../../../gql/events';
-import { Modal } from '../../shared/Modal';
-import { createModalMessage } from '../../../functions/createModalMessage';
+import { Modal, Loading } from '../../shared';
+import { createModalMessage, selectUserEvents } from '../../../functions';
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {

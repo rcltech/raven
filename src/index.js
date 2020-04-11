@@ -7,8 +7,8 @@ import { persistCache } from 'apollo-cache-persist';
 import { ThemeProvider } from '@material-ui/core/styles';
 import './index.css';
 import { App } from './App';
-import { redirectToLogin } from './functions/redirectToLogin';
-import { Loading } from './components/shared/Loading';
+import { redirectToLogin } from './functions';
+import { Loading } from './components/shared';
 import { theme } from './theme';
 import * as serviceWorker from './serviceWorker';
 

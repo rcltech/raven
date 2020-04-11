@@ -12,10 +12,10 @@ import {
 import moment from 'moment';
 import { EventTimePicker } from './EventTimePicker';
 import { ImagePicker } from './ImagePicker';
-import { MediaCard } from './MediaCard';
-import { Modal } from '../../shared/Modal';
-import { validateEvent } from '../../../functions/validateEvent';
-import imagePlaceholder from '../../../assets/no_image_placeholder.png';
+import { MediaCard } from '../MediaCard';
+import { Modal } from '../../../shared';
+import { validateEvent } from '../../../../functions/validateEvent';
+import imagePlaceholder from '../../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {

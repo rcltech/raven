@@ -11,8 +11,8 @@ import {
 } from '@material-ui/core';
 import placeholder from '../../../assets/no_image_placeholder.png';
 import { useSubscribeMutations } from '../../../custom-hooks';
-import { Modal } from '../../shared/Modal';
-import { createModalMessage } from '../../../functions/createModalMessage';
+import { Modal } from '../../shared';
+import { createModalMessage } from '../../../functions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     color: '#000',
     backgroundColor: theme.palette.others.main,
     '&:hover': {
-      backgroundColor: theme.palette.others.main
+      backgroundColor: theme.palette.others.dark
     }
   },
   content: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 0,
-    paddingTop: '56%'
+    paddingTop: '60%'
   }
 }));
 

@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     padding: 0,
-    maxHeight: '400px'
+    maxHeight: '400px',
+    overflowY: 'scroll'
   }
 }));
 

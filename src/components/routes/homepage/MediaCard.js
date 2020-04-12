@@ -68,7 +68,7 @@ export const MediaCard = ({
 
   const {
     methods: { subscribeEvent, unsubscribeEvent },
-    loading: { subscribeLoading, unsubscribeLoading },
+    loading: subscribeMutationLoading,
     error: { subscribeError, unsubscribeError }
   } = useSubscribeMutations();
 
@@ -107,13 +107,9 @@ export const MediaCard = ({
           className={isSubscribed ? classes.subscribedButton : ''}
           size="small"
           onClick={() => onSubscribeButtonClicked()}
-          disabled={disableMutation}
+          disabled={disableMutation || subscribeMutationLoading}
         >
-          {subscribeLoading || unsubscribeLoading
-            ? 'Loading'
-            : isSubscribed
-            ? 'Subscribed'
-            : 'Subscribe'}
+          {isSubscribed ? 'Subscribed' : 'Subscribe'}
         </Button>
       </Container>
       <CardContent className={classes.content}>

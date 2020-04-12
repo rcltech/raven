@@ -15,7 +15,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../../gql/events';
 import { EventForm } from './EventForm';
 import { Modal, Loading } from '../../../shared';
-import { createModalMessage } from '../../../../functions/createModalMessage';
+import { createModalMessage } from '../../../../functions';
 
 const useStyles = makeStyles(theme => ({
   root: {

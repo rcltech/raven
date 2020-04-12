@@ -24,7 +24,7 @@ export const SubscribersList = ({ subscribers = [] }) => {
 
   const classes = useStyles();
 
-  const subscribersModalTitle = `${numberOfSubscribers} people subscribed this event`;
+  const subscribersModalTitle = `${numberOfSubscribers} people subscribed to this event`;
   const subscribersModalContent = (
     <SubscribersDetails subscribers={subscribers} />
   );

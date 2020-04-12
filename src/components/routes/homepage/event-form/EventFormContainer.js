@@ -12,11 +12,10 @@ import {
 } from '@material-ui/core';
 import { Add as AddIcon, Close as CloseIcon } from '@material-ui/icons';
 import { useMutation } from '@apollo/react-hooks';
-import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../gql/events';
+import { GET_ALL_EVENTS, CREATE_EVENT } from '../../../../gql/events';
 import { EventForm } from './EventForm';
-import { Modal } from '../../shared/Modal';
-import { Loading } from '../../shared/Loading';
-import { createModalMessage } from '../../../functions/createModalMessage';
+import { Modal, Loading } from '../../../shared';
+import { createModalMessage } from '../../../../functions';
 
 const useStyles = makeStyles(theme => ({
   root: {

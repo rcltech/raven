@@ -3,10 +3,9 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core';
 import { GET_ME } from './gql/users';
-import { redirectToLogin } from './functions/redirectToLogin';
+import { redirectToLogin } from './functions';
 import { Homepage } from './components/routes/homepage/Homepage';
-import { Header } from './components/shared/Header';
-import { Loading } from './components/shared/Loading';
+import { Header, Loading } from './components/shared';
 import { UserProfile } from './components/routes/user-profile/UserProfile';
 
 const useStyles = makeStyles(theme => ({

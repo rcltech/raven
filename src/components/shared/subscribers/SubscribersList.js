@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
+import { ThumbUpAltRounded as ThumbUpIcon } from '@material-ui/icons';
 import { SubscribersDetails } from './SubscribersDetails';
 import { SubscribersModal } from './SubscribersModal';
 
@@ -7,8 +8,7 @@ const useStyles = makeStyles(theme => ({
   subscribersCount: {
     color: theme.palette.primary.main,
     '&:hover': {
-      cursor: 'pointer',
-      textDecoration: 'underline'
+      cursor: 'pointer'
     }
   }
 }));
@@ -42,12 +42,11 @@ export const SubscribersList = ({ subscribers = [] }) => {
         }
       />
       <Typography
-        variant="body2"
+        variant="body1"
         className={classes.subscribersCount}
         onClick={() => setModal({ isOpen: true, modalContent })}
       >
-        {numberOfSubscribers}{' '}
-        {numberOfSubscribers > 1 ? 'subscribers' : 'subscriber'}
+        {numberOfSubscribers} <ThumbUpIcon fontSize="inherit" />
       </Typography>
     </>
   );

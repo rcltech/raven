@@ -39,6 +39,8 @@ export const SearchBar = ({ setFilter, sortParam, setSortParam }) => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
+  const sortParams = ['Date', 'Subscribers', 'Most recent'];
+
   return (
     <Container className={classes.container}>
       <OutlinedInput
@@ -57,8 +59,11 @@ export const SearchBar = ({ setFilter, sortParam, setSortParam }) => {
           value={sortParam}
           onChange={({ target: { value } }) => setSortParam(value)}
         >
-          <MenuItem value={'Date'}>Date</MenuItem>
-          <MenuItem value={'Subscriber'}>Subscriber</MenuItem>
+          {sortParams.map((elem, index) => (
+            <MenuItem key={index} value={elem}>
+              {elem}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Container>

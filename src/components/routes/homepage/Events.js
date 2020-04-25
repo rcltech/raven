@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MediaCard } from './MediaCard';
 import { Container, Typography, makeStyles } from '@material-ui/core';
 import { SearchBar } from './SearchBar';
-import { filterEvents } from '../../../functions';
+import { filterEvents, sortEvents } from '../../../functions';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -36,7 +36,8 @@ export const Events = ({ events, me: { username } }) => {
 
   const classes = useStyles();
 
-  const filteredEvents = filterEvents({ events, filter, sortParam });
+  const filteredEvents = filterEvents({ events, filter });
+  const sortedEvents = sortEvents({ events: [...filteredEvents], sortParam });
 
   return (
     <Container className={classes.container}>
@@ -53,17 +54,13 @@ export const Events = ({ events, me: { username } }) => {
         </Container>
       ) : (
         <Container className={classes.events}>
-          {filteredEvents.map(event => {
+          {sortedEvents.map(event => {
             const { id, subscribers } = event;
-            const isEventSubscribed = getSubscribedStatus(
-              subscribers,
-              username
-            );
             return (
               <MediaCard
                 key={id}
                 event={event}
-                isEventSubscribed={isEventSubscribed}
+                isEventSubscribed={getSubscribedStatus(subscribers, username)}
                 disableMutation={false}
               />
             );

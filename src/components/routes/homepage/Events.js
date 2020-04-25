@@ -37,7 +37,7 @@ export const Events = ({ events, me: { username } }) => {
   const classes = useStyles();
 
   const filteredEvents = filterEvents({ events, filter });
-  const sortedEvents = sortEvents({ events: [...filteredEvents], sortParam });
+  sortEvents({ events: filteredEvents, sortParam });
 
   return (
     <Container className={classes.container}>
@@ -54,7 +54,7 @@ export const Events = ({ events, me: { username } }) => {
         </Container>
       ) : (
         <Container className={classes.events}>
-          {sortedEvents.map(event => {
+          {filteredEvents.map(event => {
             const { id, subscribers } = event;
             return (
               <MediaCard

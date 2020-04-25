@@ -32,7 +32,7 @@ const getSubscribedStatus = (subscribers, username) => {
 
 export const Events = ({ events, me: { username } }) => {
   const [filter, setFilter] = useState('');
-  const [sortParam, setSortParam] = useState('');
+  const [sortParam, setSortParam] = useState('Date');
 
   const classes = useStyles();
 

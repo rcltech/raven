@@ -26,10 +26,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const getSubscribedStatus = (subscribers, username) => {
-  return subscribers.map(({ username }) => username).includes(username);
-};
-
 export const Events = ({ events, me: { username } }) => {
   const [filter, setFilter] = useState('');
   const [sortParam, setSortParam] = useState('Date');
@@ -38,6 +34,11 @@ export const Events = ({ events, me: { username } }) => {
 
   const filteredEvents = filterEvents({ events, filter });
   sortEvents({ events: filteredEvents, sortParam });
+
+  const getSubscriptionStatus = ({ subscribers }) =>
+    subscribers
+      .map(({ username: subscribersUsername }) => subscribersUsername)
+      .includes(username);
 
   return (
     <Container className={classes.container}>
@@ -60,7 +61,7 @@ export const Events = ({ events, me: { username } }) => {
               <MediaCard
                 key={id}
                 event={event}
-                isEventSubscribed={getSubscribedStatus(subscribers, username)}
+                isEventSubscribed={getSubscriptionStatus({ subscribers })}
                 disableMutation={false}
               />
             );

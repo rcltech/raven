@@ -59,9 +59,9 @@ export const SearchBar = ({ setFilter, sortParam, setSortParam }) => {
           value={sortParam}
           onChange={({ target: { value } }) => setSortParam(value)}
         >
-          {sortParams.map((elem, index) => (
-            <MenuItem key={index} value={elem}>
-              {elem}
+          {sortParams.map((param, index) => (
+            <MenuItem key={index} value={param}>
+              {param}
             </MenuItem>
           ))}
         </Select>

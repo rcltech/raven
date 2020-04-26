@@ -28,6 +28,7 @@ export const SubscribersList = ({ subscribers = [] }) => {
   const subscribersModalContent = (
     <SubscribersDetails subscribers={subscribers} />
   );
+
   const modalContent = {
     title: subscribersModalTitle,
     childComponent: subscribersModalContent

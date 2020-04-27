@@ -19,7 +19,9 @@ const isAfter = ({ firstEvent, secondEvent, sortParam }) => {
     case 'Date':
       return moment(firstEventStart).isAfter(moment(secondEventStart));
     case 'Subscribers':
-      return firstEventSubscribers.length < secondEventSubscribers.length;
+      return firstEventSubscribers.length !== secondEventSubscribers.length
+        ? firstEventSubscribers.length < secondEventSubscribers.length
+        : moment(firstEventStart).isAfter(moment(secondEventStart));
     case 'Most recent':
       return moment(firstEventStart).isBefore(moment(secondEventStart));
     default:

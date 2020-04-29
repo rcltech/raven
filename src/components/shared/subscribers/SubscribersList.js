@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import { ThumbUpAltRounded as ThumbUpIcon } from '@material-ui/icons';
 import { SubscribersDetails } from './SubscribersDetails';
-import { SubscribersModal } from './SubscribersModal';
+import { ComplexModal as SubscribersModal } from '../';
 
 const useStyles = makeStyles(theme => ({
   subscribersCount: {

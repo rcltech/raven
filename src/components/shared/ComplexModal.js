@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const SubscribersModal = ({
+export const ComplexModal = ({
   modalDetails: { isOpen, modalContent },
   onClose
 }) => {

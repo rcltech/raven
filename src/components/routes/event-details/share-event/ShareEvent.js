@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Button } from '@material-ui/core';
 import { ShareEventDetails } from './ShareEventDetails';
-import { SubscribersModal } from '../../../shared/subscribers';
+import { ComplexModal as ShareEventModal } from '../../../shared';
 
 const useStyles = makeStyles(theme => ({
   shareButton: {
@@ -33,7 +33,7 @@ export const ShareEvent = () => {
 
   return (
     <>
-      <SubscribersModal
+      <ShareEventModal
         modalDetails={modal}
         onClose={() =>
           setModal({ isOpen: false, modalContent: defaultModalContent })

@@ -7,6 +7,8 @@ const GET_ALL_EVENTS = gql`
       organiser {
         id
         username
+        first_name
+        last_name
         email
       }
       title

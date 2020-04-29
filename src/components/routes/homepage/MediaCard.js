@@ -13,6 +13,7 @@ import placeholder from '../../../assets/no_image_placeholder.png';
 import { useSubscribeMutations } from '../../../custom-hooks';
 import { Modal, SubscribersList } from '../../shared';
 import { createModalMessage } from '../../../functions';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -100,6 +101,8 @@ export const MediaCard = ({
         className={classes.media}
         image={image_url ? image_url : placeholder}
         title={title}
+        component={Link}
+        to={`/event/${id}`}
       />
       <Container className={classes.subscribeBar}>
         <SubscribersList subscribers={subscribers} />

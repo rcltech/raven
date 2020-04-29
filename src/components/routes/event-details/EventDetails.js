@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { EventDetail } from './EventDetail';
 import { Loading } from '../../shared';
 import { useDataFetching } from '../../../custom-hooks';
 
@@ -9,19 +10,22 @@ export const EventDetails = () => {
   if (loading) return <Loading />;
   if (error) console.log(error);
 
-  const { events } = data;
+  const { events, me } = data;
 
   return (
     <>
       <Switch>
-        {events.map(event => (
-          <Route
-            exact
-            path={`/event/${event.id}`}
-            key={event.id}
-            component={() => <div>{JSON.stringify(event)}</div>}
-          />
-        ))}
+        {events.map(event => {
+          const { id } = event;
+          return (
+            <Route
+              exact
+              path={`/event/${id}`}
+              key={id}
+              component={() => <EventDetail event={event} me={me} />}
+            />
+          );
+        })}
       </Switch>
     </>
   );

@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 export const MediaCard = ({
   event: { id, title, start, venue, image_url, subscribers },
   isEventSubscribed,
-  disableMutation
+  disableCard
 }) => {
   const [elevation, setElevation] = useState(1);
   const [isSubscribed, setIsSubscribed] = useState(isEventSubscribed);
@@ -102,7 +102,7 @@ export const MediaCard = ({
         image={image_url ? image_url : placeholder}
         title={title}
         component={Link}
-        to={`/event/${id}`}
+        to={disableCard ? '#' : `/event/${id}`}
       />
       <Container className={classes.subscribeBar}>
         <SubscribersList subscribers={subscribers} />
@@ -110,7 +110,7 @@ export const MediaCard = ({
           className={isSubscribed ? classes.subscribedButton : ''}
           size="small"
           onClick={() => onSubscribeButtonClicked()}
-          disabled={disableMutation || subscribeMutationLoading}
+          disabled={disableCard || subscribeMutationLoading}
         >
           {isSubscribed ? 'Subscribed' : 'Subscribe'}
         </Button>

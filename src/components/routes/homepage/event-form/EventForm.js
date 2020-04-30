@@ -145,7 +145,7 @@ export const EventForm = ({ onFormSubmit }) => {
         <MediaCard
           event={{ ...event, image_url: imageBase64 }}
           isEventSubscribed={false}
-          disableMutation={true}
+          disableCard={true}
         />
       </Container>
 

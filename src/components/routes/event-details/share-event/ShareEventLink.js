@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   makeStyles,
@@ -6,6 +6,7 @@ import {
   Tooltip
 } from '@material-ui/core';
 import { Assignment as ClipboardIcon } from '@material-ui/icons';
+import { Alert as ShareEventAlert } from '../../../shared';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,26 +17,36 @@ const useStyles = makeStyles(theme => ({
   },
   clipboardIcon: {
     height: '100%',
-    color: theme.palette.primary.dark,
     '&:hover': {
       cursor: 'pointer'
     }
   }
 }));
 
-const copyEventLinkToClipboard = () => {
-  const copyText = document.getElementById('event-link');
-  copyText.select();
-  document.execCommand('copy');
-};
-
 export const ShareEventLink = () => {
+  const defaultAlertContent = {
+    isOpen: false,
+    alertContent: ''
+  };
+
+  const [alert, setAlert] = useState(defaultAlertContent);
   const classes = useStyles();
+
+  const copyEventLinkToClipboard = () => {
+    const copyText = document.getElementById('event-link');
+    copyText.select();
+    document.execCommand('copy');
+    setAlert({ isOpen: true, alertContent: 'Copied to clipboard' });
+  };
 
   return (
     <Container className={classes.root}>
+      <ShareEventAlert
+        alertDetails={alert}
+        onClose={() => setAlert(defaultAlertContent)}
+      />
       <OutlinedInput value={`${window.location}`} fullWidth id="event-link" />
-      <Tooltip title="Copy link to clipboard" aria-label="copy">
+      <Tooltip title="Copy to clipboard" aria-label="copy">
         <ClipboardIcon
           className={classes.clipboardIcon}
           onClick={() => copyEventLinkToClipboard()}

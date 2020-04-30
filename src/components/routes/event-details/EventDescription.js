@@ -21,7 +21,10 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     width: '100%',
-    paddingTop: '60%'
+    paddingTop: '60%',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
   eventDetails: {
     maxHeight: 500,
@@ -51,6 +54,7 @@ export const EventDescription = ({
         className={classes.media}
         image={image_url ? image_url : placeholder}
         title={title}
+        onClick={() => window.open(image_url, '_blank')}
       />
       <Container className={classes.eventDetails}>
         <Typography variant="h4" className={classes.descriptionDetails}>

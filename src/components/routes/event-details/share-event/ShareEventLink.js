@@ -6,7 +6,7 @@ import {
   Tooltip
 } from '@material-ui/core';
 import { Assignment as ClipboardIcon } from '@material-ui/icons';
-import { Alert as ShareEventAlert } from '../../../shared';
+import { Alert } from '../../../shared';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,7 +41,7 @@ export const ShareEventLink = () => {
 
   return (
     <Container className={classes.root}>
-      <ShareEventAlert
+      <Alert
         alertDetails={alert}
         onClose={() => setAlert(defaultAlertContent)}
       />

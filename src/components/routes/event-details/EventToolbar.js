@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { makeStyles, Container, Typography, Button } from '@material-ui/core';
+import { makeStyles, Container, Button } from '@material-ui/core';
 import { ShareEvent } from './share-event/ShareEvent';
+import { EventOrganiser } from './event-organiser/EventOrganiser';
 import { Modal } from '../../shared';
 import { useSubscribeMutations } from '../../../custom-hooks';
 import { createModalMessage, getSubscriptionStatus } from '../../../functions';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    padding: `${theme.spacing(2)}px 0px`,
     display: 'grid',
     gridTemplateColumns: '70% 30%',
-    padding: `${theme.spacing(2)}px 0px`,
+    alignItems: 'center',
     [theme.breakpoints.down('xs')]: {
       gridTemplateColumns: '100%'
     }
@@ -27,11 +29,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const EventToolbar = ({
-  event: {
-    id,
-    organiser: { first_name, last_name, email },
-    subscribers
-  },
+  event: { id, organiser, subscribers },
   me: { username }
 }) => {
   const classes = useStyles();
@@ -66,7 +64,7 @@ export const EventToolbar = ({
   return (
     <Container className={classes.root}>
       <Modal modalDetails={modal} onClose={() => window.location.reload()} />
-      <Typography>{`by ${first_name} ${last_name} (${email})`}</Typography>
+      <EventOrganiser organiser={organiser} />
       <Container className={classes.buttonsBar}>
         <Button
           className={isSubscribed ? classes.subscribedButton : ''}

@@ -9,7 +9,9 @@ const GET_ALL_EVENTS = gql`
         username
         first_name
         last_name
+        image_url
         email
+        phone
       }
       title
       start

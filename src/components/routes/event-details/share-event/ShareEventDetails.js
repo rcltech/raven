@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, makeStyles, OutlinedInput } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
+import { ShareEventLink } from './ShareEventLink';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,7 +13,7 @@ export const ShareEventDetails = () => {
 
   return (
     <Container className={classes.root}>
-      <OutlinedInput value={`${window.location}`} fullWidth />
+      <ShareEventLink />
     </Container>
   );
 };

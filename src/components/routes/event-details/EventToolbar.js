@@ -28,10 +28,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const EventToolbar = ({
-  event: { id, organiser, subscribers },
-  me: { username }
-}) => {
+export const EventToolbar = ({ event, me: { username } }) => {
+  const { id, organiser, subscribers } = event;
   const classes = useStyles();
 
   const subcriptionStatus = getSubscriptionStatus(subscribers, username);
@@ -74,7 +72,7 @@ export const EventToolbar = ({
         >
           {isSubscribed ? 'Subscribed' : 'Subscribe'}
         </Button>
-        <ShareEvent />
+        <ShareEvent event={event} />
       </Container>
     </Container>
   );

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ShareEvent = () => {
+export const ShareEvent = ({ event }) => {
   const classes = useStyles();
   const defaultModalContent = { title: '', childComponent: <></> };
 
@@ -25,7 +25,7 @@ export const ShareEvent = () => {
     modalContent: defaultModalContent
   });
 
-  const shareEventModalContent = <ShareEventDetails />;
+  const shareEventModalContent = <ShareEventDetails event={event} />;
   const modalContent = {
     title: 'Share event',
     childComponent: shareEventModalContent

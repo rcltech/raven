@@ -45,7 +45,11 @@ export const ShareEventLink = () => {
         alertDetails={alert}
         onClose={() => setAlert(defaultAlertContent)}
       />
-      <OutlinedInput value={`${window.location}`} fullWidth id="event-link" />
+      <OutlinedInput
+        value={`${window.location.href}`}
+        fullWidth
+        id="event-link"
+      />
       <Tooltip title="Copy to clipboard" aria-label="copy">
         <ClipboardIcon
           className={classes.clipboardIcon}

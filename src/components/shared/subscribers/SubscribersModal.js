@@ -8,6 +8,10 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    height: 'fit-content',
+    marginTop: '15%'
+  },
   title: {
     color: theme.palette.primary.dark,
     textAlign: 'center',
@@ -30,7 +34,13 @@ export const SubscribersModal = ({
   const titleComponent = <Typography variant="subtitle1">{title}</Typography>;
 
   return (
-    <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="xs">
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      fullWidth
+      maxWidth="xs"
+      className={classes.root}
+    >
       <DialogTitle
         children={titleComponent}
         disableTypography

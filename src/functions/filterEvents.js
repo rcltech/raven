@@ -1,3 +1,5 @@
+import { quickSort } from './quickSort';
+
 const selectUserEvents = (events, username) => {
   return events.filter(
     ({ organiser: { username: organiserUsername } }) =>
@@ -5,7 +7,7 @@ const selectUserEvents = (events, username) => {
   );
 };
 
-const filterEvents = ({ events, filter, sortParam }) => {
+const filterEvents = ({ events, filter }) => {
   return events.filter(
     ({ title, venue }) =>
       title.toLowerCase().includes(filter) ||
@@ -13,4 +15,11 @@ const filterEvents = ({ events, filter, sortParam }) => {
   );
 };
 
-export { selectUserEvents, filterEvents };
+const sortEvents = ({ events, sortParam }) => {
+  const size = events.length;
+
+  if (sortParam) quickSort({ events, left: 0, right: size - 1, sortParam });
+  return events;
+};
+
+export { selectUserEvents, filterEvents, sortEvents };

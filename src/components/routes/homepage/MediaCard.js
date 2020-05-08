@@ -9,11 +9,11 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import placeholder from '../../../assets/no_image_placeholder.png';
 import { useSubscribeMutations } from '../../../custom-hooks';
 import { Modal, SubscribersList } from '../../shared';
 import { createModalMessage } from '../../../functions';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {

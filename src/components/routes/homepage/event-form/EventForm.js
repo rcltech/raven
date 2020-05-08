@@ -14,7 +14,7 @@ import { EventTimePicker } from './EventTimePicker';
 import { ImagePicker } from './ImagePicker';
 import { MediaCard } from '../MediaCard';
 import { Modal } from '../../../shared';
-import { validateEvent } from '../../../../functions/validateEvent';
+import { validateEvent } from '../../../../functions';
 import imagePlaceholder from '../../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({

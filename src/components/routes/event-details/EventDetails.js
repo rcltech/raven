@@ -13,20 +13,18 @@ export const EventDetails = () => {
   const { events, me } = data;
 
   return (
-    <>
-      <Switch>
-        {events.map(event => {
-          const { id } = event;
-          return (
-            <Route
-              exact
-              path={`/event/${id}`}
-              key={id}
-              component={() => <EventDetail event={event} me={me} />}
-            />
-          );
-        })}
-      </Switch>
-    </>
+    <Switch>
+      {events.map(event => {
+        const { id } = event;
+        return (
+          <Route
+            exact
+            path={`/event/${id}`}
+            key={id}
+            component={() => <EventDetail event={event} me={me} />}
+          />
+        );
+      })}
+    </Switch>
   );
 };

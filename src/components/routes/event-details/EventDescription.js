@@ -1,11 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import {
   Container,
   Typography,
   makeStyles,
   CardMedia
 } from '@material-ui/core';
+import { getTimeDescription } from '../../../functions';
 import placeholder from '../../../assets/no_image_placeholder.png';
 
 const useStyles = makeStyles(theme => ({
@@ -35,13 +35,6 @@ const useStyles = makeStyles(theme => ({
     margin: `${theme.spacing(2)}px 0px`
   }
 }));
-
-const getTimeDescription = ({ start, end }) =>
-  moment(start).isSame(moment(end), 'd')
-    ? `${moment(start).format('ll')}, ${moment(start).format('LT')} - ${moment(
-        end
-      ).format('LT')}`
-    : `${moment(start).format('lll')} - ${moment(end).format('lll')}`;
 
 export const EventDescription = ({
   event: { title, image_url, subscribers, start, end, description }

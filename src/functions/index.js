@@ -1,8 +1,13 @@
+import {
+  filterEvents,
+  selectUserEvents,
+  sortEvents,
+  validateEvent,
+  getSubscriptionStatus
+} from './events';
 import { createModalMessage } from './createModalMessage';
-import { filterEvents, selectUserEvents, sortEvents } from './filterEvents';
 import { redirectToLogin } from './redirectToLogin';
-import { validateEvent } from './validateEvent';
-import { getSubscriptionStatus } from './getSubscriptionStatus';
+import { getTimeDescription } from './getTimeDescription';
 
 export {
   createModalMessage,
@@ -11,5 +16,6 @@ export {
   filterEvents,
   selectUserEvents,
   sortEvents,
-  getSubscriptionStatus
+  getSubscriptionStatus,
+  getTimeDescription
 };

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     gridGap: theme.spacing(1),
     alignItems: 'center'
   },
-  searchBar: {
+  searchInput: {
     width: 'min(100%, 300px)',
     color: theme.palette.primary.main
   },
@@ -43,13 +43,19 @@ export const SearchBar = ({ setFilter, sortParam, setSortParam }) => {
 
   return (
     <Container className={classes.container}>
-      <OutlinedInput
-        className={classes.searchBar}
-        placeholder="Search"
-        endAdornment={<SearchIcon color="inherit" />}
-        onChange={({ target: { value } }) => setFilter(value)}
-      />
-      <FormControl variant="outlined" className={classes.sortParamSelector}>
+      <FormControl className={classes.searchInput} margin="dense">
+        <OutlinedInput
+          className={classes.searchInput}
+          placeholder="Search"
+          endAdornment={<SearchIcon color="inherit" />}
+          onChange={({ target: { value } }) => setFilter(value)}
+        />
+      </FormControl>
+      <FormControl
+        variant="outlined"
+        className={classes.sortParamSelector}
+        margin="dense"
+      >
         <InputLabel ref={inputLabel} id="sort-param-selector">
           Sort by
         </InputLabel>

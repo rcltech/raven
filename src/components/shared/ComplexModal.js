@@ -10,7 +10,7 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     height: 'fit-content',
-    marginTop: '15%'
+    marginTop: '10%'
   },
   title: {
     color: theme.palette.primary.dark,

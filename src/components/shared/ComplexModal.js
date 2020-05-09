@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import {
   Typography,
   makeStyles,
   Dialog,
   DialogTitle,
-  DialogContent
+  DialogContent,
+  Slide
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +25,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const Transition = forwardRef((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
+
 export const ComplexModal = ({
   modalDetails: { isOpen, modalContent },
   onClose
@@ -39,6 +44,7 @@ export const ComplexModal = ({
       onClose={onClose}
       fullWidth
       maxWidth="xs"
+      TransitionComponent={Transition}
       className={classes.root}
     >
       <DialogTitle

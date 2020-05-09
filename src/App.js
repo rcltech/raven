@@ -4,9 +4,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core';
 import { GET_ME } from './gql/users';
 import { redirectToLogin } from './functions';
-import { Homepage } from './components/routes/homepage/Homepage';
 import { Header, Loading } from './components/shared';
-import { UserProfile } from './components/routes/user-profile/UserProfile';
+import { Homepage, UserProfile, EventDetails } from './components/routes/';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,8 +37,9 @@ export const App = () => {
       <Router>
         <Header me={me} />
         <Switch>
-          <Route path="/user" component={() => <UserProfile />} />
-          <Route exact path="/" component={() => <Homepage />} />
+          <Route exact path="/" component={Homepage} />
+          <Route exact path="/user" component={UserProfile} />
+          <Route path="/event" component={EventDetails} />
         </Switch>
       </Router>
     </div>
